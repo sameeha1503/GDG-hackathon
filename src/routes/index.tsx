@@ -65,12 +65,6 @@ function Index() {
           >
             {t("home.hero.signin")}
           </Link>
-          <Link
-            to="/lookup"
-            className="inline-flex items-center rounded-xl border border-border px-6 py-3 text-base font-semibold hover:bg-accent"
-          >
-            {t("home.hero.scan")}
-          </Link>
         </div>
       </div>
 
