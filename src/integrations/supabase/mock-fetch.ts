@@ -11,7 +11,11 @@ function toBase64(str: string): string {
     return Buffer.from(str, "utf-8").toString("base64");
   }
   if (typeof btoa !== "undefined") {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode(parseInt(p1, 16))));
+    return btoa(
+      encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) =>
+        String.fromCharCode(parseInt(p1, 16)),
+      ),
+    );
   }
   return "";
 }
@@ -21,7 +25,11 @@ function fromBase64(str: string): string {
     return Buffer.from(str, "base64").toString("utf-8");
   }
   if (typeof atob !== "undefined") {
-    return decodeURIComponent(Array.prototype.map.call(atob(str), (c: string) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)).join(""));
+    return decodeURIComponent(
+      Array.prototype.map
+        .call(atob(str), (c: string) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(""),
+    );
   }
   return "";
 }
@@ -30,7 +38,11 @@ export function b64Url(str: string): string {
   return toBase64(str).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 
-export function createMockJwt(user: { id: string; email: string; user_metadata?: Record<string, any> }): string {
+export function createMockJwt(user: {
+  id: string;
+  email: string;
+  user_metadata?: Record<string, any>;
+}): string {
   const header = b64Url(JSON.stringify({ alg: "HS256", typ: "JWT" }));
   const now = Math.floor(Date.now() / 1000);
   const payload = b64Url(
@@ -350,7 +362,8 @@ export async function handleMockSupabaseRequest(
   }
 
   if (pathname.includes("/auth/v1/user")) {
-    const authHeader = (init?.headers as any)?.Authorization || (init?.headers as any)?.authorization || "";
+    const authHeader =
+      (init?.headers as any)?.Authorization || (init?.headers as any)?.authorization || "";
     const token = authHeader.replace("Bearer ", "").trim();
     const claims = decodeMockJwt(token);
 
@@ -362,7 +375,19 @@ export async function handleMockSupabaseRequest(
       role: "authenticated",
     };
 
+    if (method === "PUT" && body?.password && user) {
+      user.password = body.password;
+      saveDb();
+    }
+
     return new Response(JSON.stringify(user), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  if (pathname.includes("/auth/v1/recover")) {
+    return new Response("{}", {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

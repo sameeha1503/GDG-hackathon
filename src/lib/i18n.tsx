@@ -87,7 +87,8 @@ const en: Dict = {
   "home.hl2.title": "Offline-Ready Continuity",
   "home.hl2.desc": "Instant local caching with automatic queue sync on reconnect",
   "home.hl3.title": "Privacy & Verification",
-  "home.hl3.desc": "Structured for ABHA linkage — simulated for this build; anonymized donor outreach",
+  "home.hl3.desc":
+    "Structured for ABHA linkage — simulated for this build; anonymized donor outreach",
   "home.demo.title": "Demo logins",
   "home.demo.subtitle":
     "This system includes realistic demonstration scenarios across all three modules.",
@@ -114,11 +115,28 @@ const en: Dict = {
   "auth.roleBloodBank": "Blood Bank Staff",
   "auth.haveAccount": "Already have an account? Sign in",
   "auth.noAccount": "Don't have an account? Sign up",
+  "auth.forgotPassword": "Forgot password?",
+  "auth.forgotPasswordTitle": "Reset your password",
+  "auth.forgotPasswordSubtitle":
+    "Enter your email address and we'll send you a password reset link.",
+  "auth.sendResetLink": "Send reset link",
+  "auth.sendingResetLink": "Sending reset link…",
+  "auth.resetLinkSent": "If an account exists for that email, a reset link has been sent.",
+  "auth.backToSignin": "Back to sign in",
+  "auth.resetPasswordTitle": "Set new password",
+  "auth.resetPasswordSubtitle": "Enter and confirm your new password below.",
+  "auth.newPassword": "New password",
+  "auth.confirmPassword": "Confirm password",
+  "auth.updatePasswordBtn": "Update password",
+  "auth.updatingPassword": "Updating password…",
+  "auth.passwordMismatch": "Passwords do not match",
+  "auth.passwordUpdated": "Password updated. Please sign in with your new password.",
+  "auth.invalidResetLink": "This reset link is invalid or has expired",
+  "auth.checkingResetLink": "Verifying reset link…",
 
   // Lookup Page
   "lookup.title": "Scan a care record",
-  "lookup.subtitle":
-    "Type the reference printed on the patient's care record or card.",
+  "lookup.subtitle": "Type the reference printed on the patient's care record or card.",
   "lookup.cameraScan": "Camera scan",
   "lookup.startCamera": "Start camera",
   "lookup.manualEntry": "Type the reference",
@@ -159,7 +177,8 @@ const en: Dict = {
   "m1.remindersLogged": "reminders logged",
   "m1.reminderLogged": "reminder logged",
   "m1.noMatch": "Nobody matches these filters.",
-  "m1.noSavedCopy": "No saved copy on this device yet. Turn demo offline mode off to load the list.",
+  "m1.noSavedCopy":
+    "No saved copy on this device yet. Turn demo offline mode off to load the list.",
   "m1.form.title": "Add a screened person",
   "m1.form.desc":
     "In production this list would arrive from the national screening database; manual entry stands in for that feed here.",
@@ -177,7 +196,8 @@ const en: Dict = {
   "m1.reminder.none": "No reminders logged yet.",
   "m1.close.title": "Close the follow-up for",
   "m1.close.optDocumentedTitle": "Report slip seen",
-  "m1.close.optDocumentedDesc": "— the confirmatory report is in hand. This unlocks the portable care record.",
+  "m1.close.optDocumentedDesc":
+    "— the confirmatory report is in hand. This unlocks the portable care record.",
   "m1.close.optUnverifiedTitle": "Says tested, no report seen",
   "m1.close.optUnverifiedDesc": "— the follow-up stops here, but nothing downstream is unlocked.",
   "m1.close.refLabel": "Report slip reference",
@@ -215,8 +235,10 @@ const en: Dict = {
   // Donors
   "m3.title": "Blood donor availability",
   "m3.subtitle": "Ranked outreach list for patients living with sickle cell disease.",
-  "m3.policyAlert1": "Blood requests are limited to patients with a documented confirmatory result of",
-  "m3.policyAlert2": ". Carriers and unverified records can never appear here — the server refuses them.",
+  "m3.policyAlert1":
+    "Blood requests are limited to patients with a documented confirmatory result of",
+  "m3.policyAlert2":
+    ". Carriers and unverified records can never appear here — the server refuses them.",
   "m3.stat.open": "Open requests",
   "m3.stat.emergency": "Emergency now",
   "m3.stat.donors": "Donors available",
@@ -332,7 +354,8 @@ const hi: Dict = {
 
   // Offline banner
   "offline.banner": "इस डिवाइस पर सहेजी गई प्रति दिखाई जा रही है",
-  "offline.bannerQueue": "आपके द्वारा किए गए बदलाव कतार में हैं और पुन: कनेक्ट होने पर भेजे जाएंगे।",
+  "offline.bannerQueue":
+    "आपके द्वारा किए गए बदलाव कतार में हैं और पुन: कनेक्ट होने पर भेजे जाएंगे।",
 
   // Home Page
   "home.hero.title": "रक्त-लिंक फील्ड स्क्रीनिंग जांच के बाद देखभाल की निरंतरता सुनिश्चित करता है।",
@@ -382,11 +405,28 @@ const hi: Dict = {
   "auth.roleBloodBank": "ब्लड बैंक कर्मचारी",
   "auth.haveAccount": "पहले से खाता है? साइन इन करें",
   "auth.noAccount": "खाता नहीं है? साइन अप करें",
+  "auth.forgotPassword": "पासवर्ड भूल गए?",
+  "auth.forgotPasswordTitle": "अपना पासवर्ड रीसेट करें",
+  "auth.forgotPasswordSubtitle":
+    "अपना ईमेल पता दर्ज करें और हम आपको एक पासवर्ड रीसेट लिंक भेजेंगे।",
+  "auth.sendResetLink": "रीसेट लिंक भेजें",
+  "auth.sendingResetLink": "रीसेट लिंक भेजा जा रहा है…",
+  "auth.resetLinkSent": "यदि उस ईमेल के लिए खाता मौजूद है, तो एक रीसेट लिंक भेज दिया गया है।",
+  "auth.backToSignin": "साइन इन पर वापस जाएं",
+  "auth.resetPasswordTitle": "नया पासवर्ड सेट करें",
+  "auth.resetPasswordSubtitle": "नीचे अपना नया पासवर्ड दर्ज करें और पुष्टि करें।",
+  "auth.newPassword": "नया पासवर्ड",
+  "auth.confirmPassword": "पासवर्ड की पुष्टि करें",
+  "auth.updatePasswordBtn": "पासवर्ड अपडेट करें",
+  "auth.updatingPassword": "पासवर्ड अपडेट हो रहा है…",
+  "auth.passwordMismatch": "पासवर्ड मेल नहीं खाते",
+  "auth.passwordUpdated": "पासवर्ड अपडेट हो गया। कृपया अपने नए पासवर्ड से साइन इन करें।",
+  "auth.invalidResetLink": "यह रीसेट लिंक अमान्य है या समाप्त हो चुका है",
+  "auth.checkingResetLink": "रीसेट लिंक की पुष्टि की जा रही है…",
 
   // Lookup Page
   "lookup.title": "रिकॉर्ड स्कैन करें",
-  "lookup.subtitle":
-    "मरीज़ के देखभाल रिकॉर्ड पर छपा संदर्भ कोड टाइप करें।",
+  "lookup.subtitle": "मरीज़ के देखभाल रिकॉर्ड पर छपा संदर्भ कोड टाइप करें।",
   "lookup.cameraScan": "कैमरा स्कैन",
   "lookup.startCamera": "कैमरा शुरू करें",
   "lookup.manualEntry": "संदर्भ कोड टाइप करें",
@@ -427,7 +467,8 @@ const hi: Dict = {
   "m1.remindersLogged": "रिमाइंडर दर्ज",
   "m1.reminderLogged": "रिमाइंडर दर्ज",
   "m1.noMatch": "इन फ़िल्टरों से कोई मेल नहीं खाता।",
-  "m1.noSavedCopy": "इस डिवाइस पर अभी तक कोई सहेजी गई प्रति नहीं है। सूची लोड करने के लिए डेमो ऑफ़लाइन मोड बंद करें।",
+  "m1.noSavedCopy":
+    "इस डिवाइस पर अभी तक कोई सहेजी गई प्रति नहीं है। सूची लोड करने के लिए डेमो ऑफ़लाइन मोड बंद करें।",
   "m1.form.title": "स्क्रीनिंग की गई नई व्यक्ति जोड़ें",
   "m1.form.desc":
     "वास्तविक प्रणाली में यह सूची राष्ट्रीय स्क्रीनिंग डेटाबेस से आएगी; यहाँ मैन्युअल प्रविष्टि उसका प्रदर्शन करती है।",
@@ -445,9 +486,11 @@ const hi: Dict = {
   "m1.reminder.none": "अभी तक कोई रिमाइंडर दर्ज नहीं हुआ है।",
   "m1.close.title": "फॉलो-अप समाप्त करें -",
   "m1.close.optDocumentedTitle": "रिपोर्ट स्लिप प्राप्त हुई",
-  "m1.close.optDocumentedDesc": "— पुष्टि रिपोर्ट हाथ में है। यह पोर्टेबल देखभाल रिकॉर्ड को सक्रिय करता है।",
+  "m1.close.optDocumentedDesc":
+    "— पुष्टि रिपोर्ट हाथ में है। यह पोर्टेबल देखभाल रिकॉर्ड को सक्रिय करता है।",
   "m1.close.optUnverifiedTitle": "जांच हुई, रिपोर्ट नहीं देखी गई",
-  "m1.close.optUnverifiedDesc": "— फॉलो-अप यहीं समाप्त होता है, लेकिन आगे का कोई रिकॉर्ड अनलॉक नहीं होता।",
+  "m1.close.optUnverifiedDesc":
+    "— फॉलो-अप यहीं समाप्त होता है, लेकिन आगे का कोई रिकॉर्ड अनलॉक नहीं होता।",
   "m1.close.refLabel": "रिपोर्ट स्लिप संदर्भ कोड",
   "m1.result.nonCarrier": "सामान्य (Non-carrier)",
   "m1.result.carrier": "वाहक (Carrier)",
@@ -468,7 +511,8 @@ const hi: Dict = {
   "m2.queueBannerPlural": "उपचार अपडेट",
   "m2.queueBanner2": "इस डिवाइस पर सहेजे गए हैं, सिंक होने की प्रतीक्षा में।",
   "m2.btn.syncNow": "अभी सिंक करें",
-  "m2.noSavedCopy": "इस डिवाइस पर अभी तक कोई सहेजी गई प्रति नहीं है — रिकॉर्ड लोड करने के लिए वापस ऑनलाइन आएं।",
+  "m2.noSavedCopy":
+    "इस डिवाइस पर अभी तक कोई सहेजी गई प्रति नहीं है — रिकॉर्ड लोड करने के लिए वापस ऑनलाइन आएं।",
   "m2.noDocumented":
     "अभी तक कोई प्रमाणित मरीज़ नहीं हैं। पहले ट्रैकर में रिपोर्ट स्लिप के साथ फॉलो-अप बंद करें।",
   "m2.confirmatoryResult": "पुष्टि परिणाम",
@@ -483,8 +527,10 @@ const hi: Dict = {
   // Donors
   "m3.title": "रक्तदाता उपलब्धता",
   "m3.subtitle": "सिकल सेल रोग से ग्रस्त मरीज़ों के लिए संपर्क सूची।",
-  "m3.policyAlert1": "रक्त अनुरोध केवल उन मरीज़ों के लिए सीमित हैं जिनके पास पुष्टि परिणाम में दर्ज है",
-  "m3.policyAlert2": "। वाहक (कैरियर) और असत्यापित रिकॉर्ड यहाँ कभी प्रदर्शित नहीं हो सकते — सर्वर उन्हें अस्वीकार करता है।",
+  "m3.policyAlert1":
+    "रक्त अनुरोध केवल उन मरीज़ों के लिए सीमित हैं जिनके पास पुष्टि परिणाम में दर्ज है",
+  "m3.policyAlert2":
+    "। वाहक (कैरियर) और असत्यापित रिकॉर्ड यहाँ कभी प्रदर्शित नहीं हो सकते — सर्वर उन्हें अस्वीकार करता है।",
   "m3.stat.open": "सक्रिय अनुरोध",
   "m3.stat.emergency": "आपातकालीन स्थिति",
   "m3.stat.donors": "उपलब्ध रक्तदाता",
@@ -625,8 +671,7 @@ const or: Dict = {
   "home.hl3.title": "ଗୋପନୀୟତା ଏବଂ ପ୍ରମାଣୀକରଣ",
   "home.hl3.desc": "ଆଭା (ABHA) ଲିଙ୍କେଜ୍ ଏବଂ ଅଜ୍ଞାତ ରକ୍ତଦାତା ସମ୍ପର୍କ",
   "home.demo.title": "ଡେମୋ ଲଗଇନ",
-  "home.demo.subtitle":
-    "ଏହି ପ୍ରଣାଳୀ ସମସ୍ତ ତିନୋଟି ମଡ୍ୟୁଲରେ ବାସ୍ତବିକ ପ୍ରଦର୍ଶନ ଦୃଶ୍ୟ ସହିତ ଉପଲବ୍ଧ।",
+  "home.demo.subtitle": "ଏହି ପ୍ରଣାଳୀ ସମସ୍ତ ତିନୋଟି ମଡ୍ୟୁଲରେ ବାସ୍ତବିକ ପ୍ରଦର୍ଶନ ଦୃଶ୍ୟ ସହିତ ଉପଲବ୍ଧ।",
   "home.demo.notice":
     "ଯୋଗ୍ୟତା ନିୟମ ଏବଂ ରକ୍ତଦାତା ଗୋପନୀୟତା ସର୍ଭରରେ ଲାଗୁ ହୋଇଛି। ସ୍ମାରକ, ଆଭା (ABHA) ID ଏବଂ ରକ୍ତଦାତା ସମ୍ପର୍କ ପ୍ରଦର୍ଶନ ପାଇଁ ସିମୁଲେଟ୍ କରାଯାଇଛି।",
 
@@ -650,11 +695,29 @@ const or: Dict = {
   "auth.roleBloodBank": "ରକ୍ତ ଭଣ୍ଡାର କର୍ମଚାରୀ",
   "auth.haveAccount": "ପୂର୍ବରୁ ଖାତା ଅଛି? ସାଇନ ଇନ କରନ୍ତୁ",
   "auth.noAccount": "ଖାତା ନାହିଁ? ସାଇନ ଅପ କରନ୍ତୁ",
+  "auth.forgotPassword": "ପାସୱାର୍ଡ ଭୁଲିଗଲେ କି?",
+  "auth.forgotPasswordTitle": "ଆପଣଙ୍କ ପାସୱାର୍ଡ ରିସେଟ୍ କରନ୍ତୁ",
+  "auth.forgotPasswordSubtitle":
+    "ଆପଣଙ୍କ ଇମେଲ୍ ଠିକଣା ପ୍ରବେଶ କରନ୍ତୁ ଏବଂ ଆମେ ଏକ ପାସୱାର୍ଡ ରିସେଟ୍ ଲିଙ୍କ୍ ପଠାଇବୁ।",
+  "auth.sendResetLink": "ରିସେଟ୍ ଲିଙ୍କ୍ ପଠାନ୍ତୁ",
+  "auth.sendingResetLink": "ରିସେଟ୍ ଲିଙ୍କ୍ ପଠାଯାଉଛି…",
+  "auth.resetLinkSent": "ଯଦି ସେହି ଇମେଲ୍ ପାଇଁ ଏକ ଆକାଉଣ୍ଟ୍ ଅଛି, ତେବେ ଏକ ରିସେଟ୍ ଲିଙ୍କ୍ ପଠାଯାଇଛି।",
+  "auth.backToSignin": "ସାଇନ୍ ଇନ୍ କୁ ଫେରନ୍ତୁ",
+  "auth.resetPasswordTitle": "ନୂଆ ପାସୱାର୍ଡ ସେଟ୍ କରନ୍ତୁ",
+  "auth.resetPasswordSubtitle": "ତଳେ ଆପଣଙ୍କର ନୂଆ ପାସୱାର୍ଡ ପ୍ରବେଶ କରନ୍ତୁ ଏବଂ ନିଶ୍ଚିତ କରନ୍ତୁ।",
+  "auth.newPassword": "ନୂଆ ପାସୱାର୍ଡ",
+  "auth.confirmPassword": "ପାସୱାର୍ଡ ନିଶ୍ଚିତ କରନ୍ତୁ",
+  "auth.updatePasswordBtn": "ପାସୱାର୍ଡ ଅପଡେଟ୍ କରନ୍ତୁ",
+  "auth.updatingPassword": "ପାସୱାର୍ଡ ଅପଡେଟ୍ ହେଉଛି…",
+  "auth.passwordMismatch": "ପାସୱାର୍ଡ ମେଳ ଖାଉନାହିଁ",
+  "auth.passwordUpdated":
+    "ପାସୱାର୍ଡ ଅପଡେଟ୍ ହୋଇଛି। ଦୟାକରି ଆପଣଙ୍କ ନୂଆ ପାସୱାର୍ଡ ସହିତ ସାଇନ୍ ଇନ୍ କରନ୍ତୁ।",
+  "auth.invalidResetLink": "ଏହି ରିସେଟ୍ ଲିଙ୍କ୍ ଅବୈଧ କିମ୍ବା ଏହାର ସମୟ ସମାପ୍ତ ହୋଇଛି",
+  "auth.checkingResetLink": "ରିସେଟ୍ ଲିଙ୍କ୍ ଯାଞ୍ଚ କରାଯାଉଛି…",
 
   // Lookup Page
   "lookup.title": "ରେକର୍ଡ ସ୍କାନ କରନ୍ତୁ",
-  "lookup.subtitle":
-    "ରୋଗୀଙ୍କ ଯତ୍ନ ରେକର୍ଡରେ ଛପା ରେଫରେନ୍ସ କୋଡ୍ ଟାଇପ୍ କରନ୍ତୁ।",
+  "lookup.subtitle": "ରୋଗୀଙ୍କ ଯତ୍ନ ରେକର୍ଡରେ ଛପା ରେଫରେନ୍ସ କୋଡ୍ ଟାଇପ୍ କରନ୍ତୁ।",
   "lookup.cameraScan": "କ୍ୟାମେରା ସ୍କାନ",
   "lookup.startCamera": "କ୍ୟାମେରା ଆରମ୍ଭ କରନ୍ତୁ",
   "lookup.manualEntry": "ରେଫରେନ୍ସ କୋଡ୍ ଟାଇପ୍ କରନ୍ତୁ",
@@ -695,7 +758,8 @@ const or: Dict = {
   "m1.remindersLogged": "ରିମାଇଣ୍ଡର ଦର୍ଜ",
   "m1.reminderLogged": "ରିମାଇଣ୍ଡର ଦର୍ଜ",
   "m1.noMatch": "ଏହି ଫିଲ୍ଟର୍ ସହିତ କେହି ମେଳ ଖାଉନାହାଁନ୍ତି।",
-  "m1.noSavedCopy": "ଏହି ଡିଭାଇସରେ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି କପି ସଂରକ୍ଷିତ ନାହିଁ। ତାଲିକା ଲୋଡ୍ କରିବାକୁ ଅଫଲାଇନ୍ ମୋଡ୍ ବନ୍ଦ କରନ୍ତୁ।",
+  "m1.noSavedCopy":
+    "ଏହି ଡିଭାଇସରେ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି କପି ସଂରକ୍ଷିତ ନାହିଁ। ତାଲିକା ଲୋଡ୍ କରିବାକୁ ଅଫଲାଇନ୍ ମୋଡ୍ ବନ୍ଦ କରନ୍ତୁ।",
   "m1.form.title": "ସ୍କ୍ରିନିଂ ହୋଇଥିବା ନୂଆ ବ୍ୟକ୍ତି ଯୋଡନ୍ତୁ",
   "m1.form.desc":
     "ବାସ୍ତବରେ ଏହି ତାଲିକା ଜାତୀୟ ଡାଟାବେସରୁ ଆସିବ; ଏଠାରେ ମାନୁଆଲ୍ ଏଣ୍ଟ୍ରି ଏହାର ପ୍ରଦର୍ଶନ କରେ।",
@@ -713,7 +777,8 @@ const or: Dict = {
   "m1.reminder.none": "ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ରିମାଇଣ୍ଡର ଦର୍ଜ ହୋଇନାହିଁ।",
   "m1.close.title": "ଫଲୋ-ଅପ୍ ସମାପ୍ତ କରନ୍ତୁ -",
   "m1.close.optDocumentedTitle": "ରିପୋର୍ଟ ସ୍ଲିପ୍ ମିଳିଛି",
-  "m1.close.optDocumentedDesc": "— ନିଶ୍ଚିତ ରିପୋର୍ଟ ହାତରେ ଅଛି। ଏହା ପୋର୍ଟେବଲ୍ କେୟାର ରେକର୍ଡକୁ ସକ୍ରିୟ କରେ।",
+  "m1.close.optDocumentedDesc":
+    "— ନିଶ୍ଚିତ ରିପୋର୍ଟ ହାତରେ ଅଛି। ଏହା ପୋର୍ଟେବଲ୍ କେୟାର ରେକର୍ଡକୁ ସକ୍ରିୟ କରେ।",
   "m1.close.optUnverifiedTitle": "ପରୀକ୍ଷା ହୋଇଛି, ରିପୋର୍ଟ ଦେଖାଯାଇ ନାହିଁ",
   "m1.close.optUnverifiedDesc": "— ଫଲୋ-ଅପ୍ ଏଠାରେ ସମାପ୍ତ ହୁଏ, କିନ୍ତୁ ଆଗକୁ କିଛି ଅନଲକ୍ ହୁଏ ନାହିଁ।",
   "m1.close.refLabel": "ରିପୋର୍ଟ ସ୍ଲିପ୍ ରେଫରେନ୍ସ କୋଡ୍",
@@ -736,7 +801,8 @@ const or: Dict = {
   "m2.queueBannerPlural": "ଚିକିତ୍ସା ଅପଡେଟ୍",
   "m2.queueBanner2": "ଏହି ଡିଭାଇସରେ ସଂରକ୍ଷିତ, ସିଙ୍କ୍ ହେବାକୁ ଅପେକ୍ଷା କରିଛି।",
   "m2.btn.syncNow": "ବର୍ତ୍ତମାନ ସିଙ୍କ୍ କରନ୍ତୁ",
-  "m2.noSavedCopy": "ଏହି ଡିଭାଇସରେ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି କପି ସଂରକ୍ଷିତ ନାହିଁ — ରେକର୍ଡ ଲୋଡ୍ କରିବାକୁ ଅନଲାଇନ୍ ଆସନ୍ତୁ।",
+  "m2.noSavedCopy":
+    "ଏହି ଡିଭାଇସରେ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି କପି ସଂରକ୍ଷିତ ନାହିଁ — ରେକର୍ଡ ଲୋଡ୍ କରିବାକୁ ଅନଲାଇନ୍ ଆସନ୍ତୁ।",
   "m2.noDocumented":
     "ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ପ୍ରମାଣିତ ରୋଗୀ ନାହାଁନ୍ତି। ପ୍ରଥମେ ଟ୍ରାକରରେ ରିପୋର୍ଟ ସ୍ଲିପ୍ ସହିତ ଫଲୋ-ଅପ୍ ବନ୍ଦ କରନ୍ତୁ।",
   "m2.confirmatoryResult": "ନିଶ୍ଚିତ ଫଳାଫଳ",
@@ -751,8 +817,10 @@ const or: Dict = {
   // Donors
   "m3.title": "ରକ୍ତଦାତା ଉପଲବ୍ଧତା",
   "m3.subtitle": "ସିକଲ ସେଲ ରୋଗୀ ପାଇଁ ସମ୍ପର୍କ ତାଲିକା।",
-  "m3.policyAlert1": "ରକ୍ତ ଅନୁରୋଧ କେବଳ ସେହି ରୋଗୀଙ୍କ ପାଇଁ ସୀମିତ ଯାହାଙ୍କର ନିଶ୍ଚିତ ରିପୋର୍ଟରେ ଉଲ୍ଲେଖ ଅଛି",
-  "m3.policyAlert2": "। ବାହକ ଏବଂ ଅପ୍ରମାଣିତ ରେକର୍ଡ ଏଠାରେ କଦାପି ପ୍ରଦର୍ଶିତ ହୋଇପାରିବ ନାହିଁ — ସର୍ଭର ଏହାକୁ ପ୍ରତ୍ୟାଖ୍ୟାନ କରେ।",
+  "m3.policyAlert1":
+    "ରକ୍ତ ଅନୁରୋଧ କେବଳ ସେହି ରୋଗୀଙ୍କ ପାଇଁ ସୀମିତ ଯାହାଙ୍କର ନିଶ୍ଚିତ ରିପୋର୍ଟରେ ଉଲ୍ଲେଖ ଅଛି",
+  "m3.policyAlert2":
+    "। ବାହକ ଏବଂ ଅପ୍ରମାଣିତ ରେକର୍ଡ ଏଠାରେ କଦାପି ପ୍ରଦର୍ଶିତ ହୋଇପାରିବ ନାହିଁ — ସର୍ଭର ଏହାକୁ ପ୍ରତ୍ୟାଖ୍ୟାନ କରେ।",
   "m3.stat.open": "ସକ୍ରିୟ ଅନୁରୋଧ",
   "m3.stat.emergency": "ଜରୁରୀକାଳୀନ ସ୍ଥିତି",
   "m3.stat.donors": "ଉପଲବ୍ଧ ରକ୍ତଦାତା",
@@ -918,11 +986,28 @@ const mr: Dict = {
   "auth.roleBloodBank": "रक्तपेढी कर्मचारी",
   "auth.haveAccount": "आधीच खाते आहे? साइन इन करा",
   "auth.noAccount": "खाते नाही? साइन अप करा",
+  "auth.forgotPassword": "पासवर्ड विसरलात?",
+  "auth.forgotPasswordTitle": "तुमचा पासवर्ड रीसेट करा",
+  "auth.forgotPasswordSubtitle":
+    "तुमचा ईमेल पत्ता प्रविष्ट करा आणि आम्ही तुम्हाला पासवर्ड रीसेट लिंक पाठवू.",
+  "auth.sendResetLink": "रीसेट लिंक पाठवा",
+  "auth.sendingResetLink": "रीसेट लिंक पाठवत आहे…",
+  "auth.resetLinkSent": "त्या ईमेलसाठी खाते अस्तित्वात असल्यास, एक रीसेट लिंक पाठवली गेली आहे.",
+  "auth.backToSignin": "साइन इन वर परत जा",
+  "auth.resetPasswordTitle": "नवीन पासवर्ड सेट करा",
+  "auth.resetPasswordSubtitle": "खाली तुमचा नवीन पासवर्ड प्रविष्ट करा आणि पुष्टी करा.",
+  "auth.newPassword": "नवीन पासवर्ड",
+  "auth.confirmPassword": "पासवर्ड पुष्टी करा",
+  "auth.updatePasswordBtn": "पासवर्ड अपडेट करा",
+  "auth.updatingPassword": "पासवर्ड अपडेट होत आहे…",
+  "auth.passwordMismatch": "पासवर्ड जुळत नाहीत",
+  "auth.passwordUpdated": "पासवर्ड अपडेट झाला. कृपया तुमच्या नवीन पासवर्डने साइन इन करा.",
+  "auth.invalidResetLink": "ही रीसेट लिंक अवैध आहे किंवा तिची मुदत संपली आहे",
+  "auth.checkingResetLink": "रीसेट लिंक तपासत आहे…",
 
   // Lookup Page
   "lookup.title": "नोंद स्कॅन करा",
-  "lookup.subtitle":
-    "रुग्णाच्या काळजी नोंदीवर छापलेला संदर्भ कोड टाइप करा.",
+  "lookup.subtitle": "रुग्णाच्या काळजी नोंदीवर छापलेला संदर्भ कोड टाइप करा.",
   "lookup.cameraScan": "कॅमेरा स्कॅन",
   "lookup.startCamera": "कॅमेरा सुरू करा",
   "lookup.manualEntry": "संदर्भ कोड टाइप करा",
@@ -963,7 +1048,8 @@ const mr: Dict = {
   "m1.remindersLogged": "स्मरणपत्रे नोंदवली",
   "m1.reminderLogged": "स्मरणपत्र नोंदवले",
   "m1.noMatch": "या फिल्टर्सशी कोणीही जुळत नाही.",
-  "m1.noSavedCopy": "या डिव्हाइसवर अद्याप कोणतीही प्रत जतन केलेली नाही. यादी लोड करण्यासाठी ऑफलाइन मोड बंद करा.",
+  "m1.noSavedCopy":
+    "या डिव्हाइसवर अद्याप कोणतीही प्रत जतन केलेली नाही. यादी लोड करण्यासाठी ऑफलाइन मोड बंद करा.",
   "m1.form.title": "स्क्रीनिंग झालेली व्यक्ती जोडा",
   "m1.form.desc":
     "प्रत्यक्षात ही यादी राष्ट्रीय डेटाबेसमधून येईल; येथे मॅन्युअल नोंद प्रात्यक्षिकासाठी आहे.",
@@ -1004,7 +1090,8 @@ const mr: Dict = {
   "m2.queueBannerPlural": "उपचार अपडेट्स",
   "m2.queueBanner2": "या डिव्हाइसवर जतन केले आहेत, सिंक होण्याची वाट पाहत आहेत.",
   "m2.btn.syncNow": "आत्ता सिंक करा",
-  "m2.noSavedCopy": "या डिव्हाइसवर अद्याप कोणतीही प्रत जतन केलेली नाही — रेकॉर्ड लोड करण्यासाठी परत ऑनलाइन या.",
+  "m2.noSavedCopy":
+    "या डिव्हाइसवर अद्याप कोणतीही प्रत जतन केलेली नाही — रेकॉर्ड लोड करण्यासाठी परत ऑनलाइन या.",
   "m2.noDocumented":
     "अद्याप कोणतेही प्रमाणित रुग्ण नाहीत. आधी ट्रॅकरमध्ये रिपोर्ट स्लिपसह फॉलो-अप पूर्ण करा.",
   "m2.confirmatoryResult": "पुष्टीकरण निकाल",
@@ -1019,8 +1106,10 @@ const mr: Dict = {
   // Donors
   "m3.title": "रक्तदाता उपलब्धता",
   "m3.subtitle": "सिकल सेल रुग्णांसाठी संपर्क यादी.",
-  "m3.policyAlert1": "रक्त विनंत्या केवळ अशा रुग्णांसाठी मर्यादित आहेत ज्यांच्या पुष्टीकरण अहवालात नोंद आहे",
-  "m3.policyAlert2": "। वाहक (कॅरिअर) आणि असत्यापित नोंदी येथे कधीही दिसू शकत नाहीत — सर्व्हर त्यांना नकार देतो.",
+  "m3.policyAlert1":
+    "रक्त विनंत्या केवळ अशा रुग्णांसाठी मर्यादित आहेत ज्यांच्या पुष्टीकरण अहवालात नोंद आहे",
+  "m3.policyAlert2":
+    "। वाहक (कॅरिअर) आणि असत्यापित नोंदी येथे कधीही दिसू शकत नाहीत — सर्व्हर त्यांना नकार देतो.",
   "m3.stat.open": "सक्रिय विनंत्या",
   "m3.stat.emergency": "तातडीची स्थिती",
   "m3.stat.donors": "उपलब्ध रक्तदाते",
@@ -1161,8 +1250,7 @@ const gu: Dict = {
   "home.hl3.title": "ગોપનીયતા અને ચકાસણી",
   "home.hl3.desc": "આભા (ABHA) લિંકેજ અને અનામી રક્તદાતા સંપર્ક",
   "home.demo.title": "ડેમો લૉગિન",
-  "home.demo.subtitle":
-    "આ સિસ્ટમ ત્રણેય મોડ્યુલમાં વાસ્તવિક પ્રદર્શન દૃશ્યો સાથે ઉપલબ્ધ છે.",
+  "home.demo.subtitle": "આ સિસ્ટમ ત્રણેય મોડ્યુલમાં વાસ્તવિક પ્રદર્શન દૃશ્યો સાથે ઉપલબ્ધ છે.",
   "home.demo.notice":
     "પાત્રતા નિયમો અને રક્તદાતા ગોપનીયતા સર્વર પર લાગુ થાય છે. રિમાઇન્ડર્સ, આભા (ABHA) ID અને રક્તદાતા સંપર્ક પ્રદર્શન માટે સિમ્યુલેટેડ છે.",
 
@@ -1186,11 +1274,28 @@ const gu: Dict = {
   "auth.roleBloodBank": "બ્લડ બેંક સ્ટાફ",
   "auth.haveAccount": "પહેલેથી એકાઉન્ટ છે? સાઇન ઇન કરો",
   "auth.noAccount": "એકાઉન્ટ નથી? સાઇન અપ કરો",
+  "auth.forgotPassword": "પાસવર્ડ ભૂલી ગયા?",
+  "auth.forgotPasswordTitle": "તમારો પાસવર્ડ રીસેટ કરો",
+  "auth.forgotPasswordSubtitle":
+    "તમારું ઇમેઇલ સરનામું દાખલ કરો અને અમે તમને પાસવર્ડ રીસેટ લિંક મોકલીશું.",
+  "auth.sendResetLink": "રીસેટ લિંક મોકલો",
+  "auth.sendingResetLink": "રીસેટ લિંક મોકલાઈ રહી છે…",
+  "auth.resetLinkSent": "જો તે ઇમેઇલ માટે એકાઉન્ટ અસ્તિત્વમાં છે, તો રીસેટ લિંક મોકલાઈ ગઈ છે.",
+  "auth.backToSignin": "સાઇન ઇન પર પાછા જાઓ",
+  "auth.resetPasswordTitle": "નવો પાસવર્ડ સેટ કરો",
+  "auth.resetPasswordSubtitle": "નીચે તમારો નવો પાસવર્ડ દાખલ કરો અને પુષ્ટિ કરો.",
+  "auth.newPassword": "નવો પાસવર્ડ",
+  "auth.confirmPassword": "પાસવર્ડ પુષ્ટિ કરો",
+  "auth.updatePasswordBtn": "પાસવર્ડ અપડેટ કરો",
+  "auth.updatingPassword": "પાસવર્ડ અપડેટ થઈ રહ્યો છે…",
+  "auth.passwordMismatch": "પાસવર્ડ મેળ ખાતા નથી",
+  "auth.passwordUpdated": "પાસવર્ડ અપડેટ થયો. કૃપા કરીને તમારા નવા પાસવર્ડ સાથે સાઇન ઇન કરો.",
+  "auth.invalidResetLink": "આ રીસેટ લિંક અમાન્ય છે અથવા તેની મુદત સમાપ્ત થઈ ગઈ છે",
+  "auth.checkingResetLink": "રીસેટ લિંક ચકાસી રહ્યા છીએ…",
 
   // Lookup Page
   "lookup.title": "રેકોર્ડ સ્કેન કરો",
-  "lookup.subtitle":
-    "દર્દીના સંભાળ રેકોર્ડ પર છપાયેલ સંદર્ભ કોડ લખો.",
+  "lookup.subtitle": "દર્દીના સંભાળ રેકોર્ડ પર છપાયેલ સંદર્ભ કોડ લખો.",
   "lookup.cameraScan": "કૅમેરા સ્કેન",
   "lookup.startCamera": "કૅમેરો શરૂ કરો",
   "lookup.manualEntry": "સંદર્ભ કોડ લખો",
@@ -1231,7 +1336,8 @@ const gu: Dict = {
   "m1.remindersLogged": "રિમાઇન્ડર્સ નોંધાયા",
   "m1.reminderLogged": "રિમાઇન્ડર નોંધાયું",
   "m1.noMatch": "આ ફિલ્ટર્સ સાથે કોઈ મેળ ખાતું નથી.",
-  "m1.noSavedCopy": "આ ઉપકરણ પર હજુ સુધી કોઈ નકલ સાચવેલી નથી. યાદી લોડ કરવા માટે ઑફલાઇન મોડ બંધ કરો.",
+  "m1.noSavedCopy":
+    "આ ઉપકરણ પર હજુ સુધી કોઈ નકલ સાચવેલી નથી. યાદી લોડ કરવા માટે ઑફલાઇન મોડ બંધ કરો.",
   "m1.form.title": "સ્ક્રીનીંગ થયેલ નવી વ્યક્તિ ઉમેરો",
   "m1.form.desc":
     "વાસ્તવિક સિસ્ટમમાં આ યાદી રાષ્ટ્રીય ડેટાબેઝમાંથી આવશે; અહીં મેન્યુઅલ એન્ટ્રી તેનું પ્રદર્શન કરે છે.",
@@ -1249,7 +1355,8 @@ const gu: Dict = {
   "m1.reminder.none": "હજુ સુધી કોઈ રિમાઇન્ડર નોંધાયેલ નથી.",
   "m1.close.title": "માટે ફોલો-અપ બંધ કરો -",
   "m1.close.optDocumentedTitle": "રિપોર્ટ સ્લિપ મળી",
-  "m1.close.optDocumentedDesc": "— પુષ્ટિ અહેવાલ હાથમાં છે. આ પોર્ટેબલ સંભાળ રેકોર્ડને સક્ષમ કરે છે.",
+  "m1.close.optDocumentedDesc":
+    "— પુષ્ટિ અહેવાલ હાથમાં છે. આ પોર્ટેબલ સંભાળ રેકોર્ડને સક્ષમ કરે છે.",
   "m1.close.optUnverifiedTitle": "તપાસ થઈ, રિપોર્ટ જોવાયો નથી",
   "m1.close.optUnverifiedDesc": "— ફોલો-અપ અહીં સમાપ્ત થાય છે, પરંતુ આગળ કંઈપણ અનલૉક થતું નથી.",
   "m1.close.refLabel": "રિપોર્ટ સ્લિપ સંદર્ભ કોડ",
@@ -1287,8 +1394,10 @@ const gu: Dict = {
   // Donors
   "m3.title": "રક્તદાતા ઉપલબ્ધતા",
   "m3.subtitle": "સિકલ સેલ રોગના દર્દીઓ માટે સંપર્ક સૂચિ.",
-  "m3.policyAlert1": "રક્ત વિનંતીઓ ફક્ત તે જ દર્દીઓ માટે મર્યાદિત છે જેમના પુષ્ટિ અહેવાલમાં નોંધાયેલ છે",
-  "m3.policyAlert2": "। વાહક (કેરિયર) અને અપ્રમાણિત રેકોર્ડ અહીં ક્યારેય દેખાશે નહીં — સર્વર તેને નકારે છે.",
+  "m3.policyAlert1":
+    "રક્ત વિનંતીઓ ફક્ત તે જ દર્દીઓ માટે મર્યાદિત છે જેમના પુષ્ટિ અહેવાલમાં નોંધાયેલ છે",
+  "m3.policyAlert2":
+    "। વાહક (કેરિયર) અને અપ્રમાણિત રેકોર્ડ અહીં ક્યારેય દેખાશે નહીં — સર્વર તેને નકારે છે.",
   "m3.stat.open": "સક્રિય વિનંતીઓ",
   "m3.stat.emergency": "તાકીદની સ્થિતિ",
   "m3.stat.donors": "ઉપલબ્ધ રક્તદાતા",

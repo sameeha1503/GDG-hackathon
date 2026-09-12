@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Outlet, useMatches } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -22,16 +22,29 @@ export const Route = createFileRoute("/auth")({
       { title: "Sign in or Sign up — Rakt-Link" },
       {
         name: "description",
-        content: "Sign in or create an account as an NSCAEM health worker or blood bank desk to use Rakt-Link.",
+        content:
+          "Sign in or create an account as an NSCAEM health worker or blood bank desk to use Rakt-Link.",
       },
       { property: "og:title", content: "Sign in or Sign up — Rakt-Link" },
-      { property: "og:description", content: "Health worker and blood bank sign-in and registration for Rakt-Link." },
+      {
+        property: "og:description",
+        content: "Health worker and blood bank sign-in and registration for Rakt-Link.",
+      },
     ],
   }),
   component: AuthPage,
 });
 
 function AuthPage() {
+  const matches = useMatches();
+  const isChildRoute = matches.some(
+    (m) => m.routeId === "/auth/reset-password" || m.id?.endsWith("/reset-password"),
+  );
+
+  if (isChildRoute) {
+    return <Outlet />;
+  }
+
   const { t } = useI18n();
   const navigate = useNavigate();
   const search = Route.useSearch();
@@ -41,6 +54,8 @@ function AuthPage() {
   // Sign In fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showForgot, setShowForgot] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
 
   // Sign Up fields
   const [signupName, setSignupName] = useState("");
@@ -52,6 +67,7 @@ function AuthPage() {
   useEffect(() => {
     if (search.mode && (search.mode === "signin" || search.mode === "signup")) {
       setMode(search.mode);
+      setShowForgot(false);
     }
   }, [search.mode]);
 
@@ -64,6 +80,22 @@ function AuthPage() {
     onSuccess: () => {
       toast.success("Signed in");
       navigate({ to: "/tracker" });
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const forgotPassword = useMutation({
+    mutationFn: async () => {
+      const targetEmail = (forgotEmail || email).trim();
+      const redirectUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/auth/reset-password`;
+      const { error } = await supabase.auth.resetPasswordForEmail(targetEmail, {
+        redirectTo: redirectUrl,
+      });
+      if (error) throw new Error(error.message);
+    },
+    onSuccess: () => {
+      toast.success(t("auth.resetLinkSent"));
+      setShowForgot(false);
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -105,6 +137,7 @@ function AuthPage() {
         setEmail(signupEmail);
         setPassword(signupPassword);
         setMode("signin");
+        setShowForgot(false);
       }
     },
     onError: (error: Error) => toast.error(error.message),
@@ -114,8 +147,20 @@ function AuthPage() {
     <AppShell>
       <div className="mx-auto max-w-lg">
         <SectionHeading
-          title={mode === "signup" ? t("auth.signupTitle") : t("auth.title")}
-          subtitle={mode === "signup" ? t("auth.signupSubtitle") : t("auth.subtitle")}
+          title={
+            mode === "signup"
+              ? t("auth.signupTitle")
+              : showForgot
+                ? t("auth.forgotPasswordTitle")
+                : t("auth.title")
+          }
+          subtitle={
+            mode === "signup"
+              ? t("auth.signupSubtitle")
+              : showForgot
+                ? t("auth.forgotPasswordSubtitle")
+                : t("auth.subtitle")
+          }
         />
 
         <Card>
@@ -123,7 +168,10 @@ function AuthPage() {
           <div className="mb-6 flex rounded-xl border border-border bg-secondary/40 p-1">
             <button
               type="button"
-              onClick={() => setMode("signin")}
+              onClick={() => {
+                setMode("signin");
+                setShowForgot(false);
+              }}
               className={cn(
                 "flex-1 rounded-lg py-2.5 text-center text-sm font-semibold transition-all",
                 mode === "signin"
@@ -135,7 +183,10 @@ function AuthPage() {
             </button>
             <button
               type="button"
-              onClick={() => setMode("signup")}
+              onClick={() => {
+                setMode("signup");
+                setShowForgot(false);
+              }}
               className={cn(
                 "flex-1 rounded-lg py-2.5 text-center text-sm font-semibold transition-all",
                 mode === "signup"
@@ -148,62 +199,127 @@ function AuthPage() {
           </div>
 
           {mode === "signin" ? (
-            /* Sign In Form */
-            <div>
-              <form
-                className="space-y-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  signIn.mutate();
-                }}
-              >
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold">
-                    {t("common.email")}
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    autoComplete="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password" className="block text-sm font-semibold">
-                    {t("common.password")}
-                  </label>
-                  <input
-                    id="password"
-                    type="password"
-                    autoComplete="current-password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={signIn.isPending}
-                  className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-red-600 px-6 py-3.5 text-base font-semibold text-white shadow-md shadow-rose-600/20 transition-all hover:from-rose-500 hover:to-red-500 hover:shadow-lg hover:shadow-rose-600/30 disabled:opacity-60 active:scale-99"
+            showForgot ? (
+              /* Forgot Password Form */
+              <div>
+                <form
+                  className="space-y-4"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    forgotPassword.mutate();
+                  }}
                 >
-                  {signIn.isPending ? t("auth.signingIn") : t("auth.signinBtn")}
-                </button>
-              </form>
+                  <div>
+                    <label htmlFor="forgot-email" className="block text-sm font-semibold">
+                      {t("common.email")}
+                    </label>
+                    <input
+                      id="forgot-email"
+                      type="email"
+                      autoComplete="email"
+                      value={forgotEmail || email}
+                      onChange={(e) => {
+                        setForgotEmail(e.target.value);
+                        setEmail(e.target.value);
+                      }}
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={forgotPassword.isPending}
+                    className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-red-600 px-6 py-3.5 text-base font-semibold text-white shadow-md shadow-rose-600/20 transition-all hover:from-rose-500 hover:to-red-500 hover:shadow-lg hover:shadow-rose-600/30 disabled:opacity-60 active:scale-99"
+                  >
+                    {forgotPassword.isPending
+                      ? t("auth.sendingResetLink")
+                      : t("auth.sendResetLink")}
+                  </button>
+                </form>
 
-              <div className="mt-4 text-center">
-                <button
-                  type="button"
-                  onClick={() => setMode("signup")}
-                  className="text-sm font-semibold text-primary hover:underline"
-                >
-                  {t("auth.noAccount")}
-                </button>
+                <div className="mt-4 text-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowForgot(false)}
+                    className="text-sm font-semibold text-primary hover:underline"
+                  >
+                    ← {t("auth.backToSignin")}
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              /* Sign In Form */
+              <div>
+                <form
+                  className="space-y-4"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    signIn.mutate();
+                  }}
+                >
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold">
+                      {t("common.email")}
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-semibold">
+                      {t("common.password")}
+                    </label>
+                    <input
+                      id="password"
+                      type="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                      required
+                    />
+                    <div className="mt-1.5 flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setForgotEmail(email);
+                          setShowForgot(true);
+                        }}
+                        className="text-xs font-semibold text-primary hover:underline"
+                      >
+                        {t("auth.forgotPassword")}
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={signIn.isPending}
+                    className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-red-600 px-6 py-3.5 text-base font-semibold text-white shadow-md shadow-rose-600/20 transition-all hover:from-rose-500 hover:to-red-500 hover:shadow-lg hover:shadow-rose-600/30 disabled:opacity-60 active:scale-99"
+                  >
+                    {signIn.isPending ? t("auth.signingIn") : t("auth.signinBtn")}
+                  </button>
+                </form>
+
+                <div className="mt-4 text-center">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMode("signup");
+                      setShowForgot(false);
+                    }}
+                    className="text-sm font-semibold text-primary hover:underline"
+                  >
+                    {t("auth.noAccount")}
+                  </button>
+                </div>
+              </div>
+            )
           ) : (
             /* Sign Up Form */
             <div>
