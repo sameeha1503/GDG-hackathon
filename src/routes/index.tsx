@@ -1,9 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ClipboardList,
-  QrCode,
-  HeartHandshake,
-  ArrowRight,
   ShieldCheck,
   Zap,
   Globe2,
@@ -35,45 +31,21 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { t } = useI18n();
 
-  const modules = [
-    {
-      to: "/tracker" as const,
-      icon: ClipboardList,
-      title: t("home.card1.title"),
-      body: t("home.card1.body"),
-      badge: "HPLC Track",
-    },
-    {
-      to: "/records" as const,
-      icon: QrCode,
-      title: t("home.card2.title"),
-      body: t("home.card2.body"),
-      badge: "Portable QR",
-    },
-    {
-      to: "/donors" as const,
-      icon: HeartHandshake,
-      title: t("home.card3.title"),
-      body: t("home.card3.body"),
-      badge: "Compatible Match",
-    },
-  ];
-
   const highlights = [
     {
       icon: Globe2,
-      title: "5 Regional Languages",
-      desc: "Hindi, Odia, Marathi, Gujarati & English for ground field workers",
+      title: t("home.hl1.title"),
+      desc: t("home.hl1.desc"),
     },
     {
       icon: Zap,
-      title: "Offline-Ready Continuity",
-      desc: "Instant local caching with automatic queue sync on reconnect",
+      title: t("home.hl2.title"),
+      desc: t("home.hl2.desc"),
     },
     {
       icon: ShieldCheck,
-      title: "Privacy & Verification",
-      desc: "Structured for ABHA linkage — simulated for this build; anonymized donor outreach",
+      title: t("home.hl3.title"),
+      desc: t("home.hl3.desc"),
     },
   ];
 
@@ -109,36 +81,6 @@ function Index() {
             </Link>
           </div>
         </div>
-      </div>
-
-      {/* Core Action Modules */}
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
-        {modules.map((m) => (
-          <Link
-            key={m.to}
-            to={m.to}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md active:scale-99"
-          >
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-rose-600 group-hover:to-red-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-rose-600/25">
-                  <m.icon className="size-6" aria-hidden />
-                </div>
-                <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
-                  {m.badge}
-                </span>
-              </div>
-              <h2 className="mt-5 text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
-                {m.title}
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
-            </div>
-            <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-primary">
-              <span>{t("common.open")}</span>
-              <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </div>
-          </Link>
-        ))}
       </div>
 
       {/* Trust & Architecture Highlights */}

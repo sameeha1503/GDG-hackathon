@@ -99,23 +99,25 @@ function DonorsPage() {
       <Card className="mb-5 border-primary/40 bg-secondary/40">
         <p className="flex items-start gap-2 text-sm">
           <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" />
-          Blood requests are limited to patients with a documented confirmatory result of{" "}
-          <strong>Disease</strong>. Carriers and unverified records can never appear here — the
-          server refuses them.
+          <span>
+            {t("m3.policyAlert1")}{" "}
+            <strong>{t("m1.result.disease", "Disease")}</strong>
+            {t("m3.policyAlert2")}
+          </span>
         </p>
       </Card>
 
       {dashboard.data && (
         <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { label: "Open requests", value: dashboard.data.openRequests },
-            { label: "Emergency now", value: dashboard.data.byUrgency.Emergency },
+            { label: t("m3.stat.open"), value: dashboard.data.openRequests },
+            { label: t("m3.stat.emergency"), value: dashboard.data.byUrgency.Emergency },
             {
-              label: "Donors available",
+              label: t("m3.stat.donors"),
               value: `${dashboard.data.donorsAvailable}/${dashboard.data.donorsTotal}`,
             },
             {
-              label: "Accepted responses",
+              label: t("m3.stat.accepted"),
               value: `${dashboard.data.acceptedResponses}/${dashboard.data.notificationsSent}`,
             },
           ].map((s) => (
@@ -133,14 +135,14 @@ function DonorsPage() {
           onClick={() => setShowRequestForm((v) => !v)}
           className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground"
         >
-          New blood request
+          {t("m3.btn.newRequest")}
         </button>
         <button
           type="button"
           onClick={() => setShowDonorForm((v) => !v)}
           className="flex items-center gap-2 rounded-xl border border-border px-5 py-3 font-semibold hover:bg-accent"
         >
-          <UserPlus className="size-5" /> Register a donor
+          <UserPlus className="size-5" /> {t("m3.btn.registerDonor")}
         </button>
       </div>
 
@@ -163,19 +165,19 @@ function DonorsPage() {
         />
       )}
 
-      <h2 className="mb-3 text-xl font-bold">Requests</h2>
+      <h2 className="mb-3 text-xl font-bold">{t("m3.section.requests")}</h2>
       <div className="space-y-3">
         {(requests.data ?? []).map((r) => (
           <Card key={r.id}>
             <div className="flex flex-wrap items-start gap-4">
               <div className="min-w-56 flex-1">
                 <p className="text-lg font-bold">
-                  {r.blood_group_needed} · {r.units_needed} unit{r.units_needed === 1 ? "" : "s"} ·{" "}
+                  {r.blood_group_needed} · {r.units_needed} {r.units_needed === 1 ? t("m3.unit") : t("m3.unitsPlural")} ·{" "}
                   {r.component}
                 </p>
                 <p className="font-mono text-xs text-muted-foreground">{r.request_code}</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {r.patient_name} ({r.patient_code}) · {r.hospital_name} · needed by {r.required_by}
+                  {r.patient_name} ({r.patient_code}) · {r.hospital_name} · {t("m3.neededBy")} {r.required_by}
                 </p>
               </div>
               <div className="text-sm">
@@ -192,16 +194,16 @@ function DonorsPage() {
                   {r.urgency_level}
                 </span>
                 <p className="mt-2">
-                  Round {r.notification_round} ·{" "}
+                  {t("m3.round")} {r.notification_round} ·{" "}
                   {roundRadiusKm(r.notification_round) > 100
-                    ? "state-wide"
+                    ? t("m3.statewide")
                     : `${roundRadiusKm(r.notification_round)} km`}
                 </p>
                 <p className="text-muted-foreground">
-                  {r.notified} notified · {r.accepted} accepted · {r.declined} declined
+                  {r.notified} {t("m3.notified")} · {r.accepted} {t("m3.accepted")} · {r.declined} {t("m3.declined")}
                 </p>
                 <p className="mt-1 font-semibold">
-                  {r.status === "confirmed" ? "Donor confirmed" : "Open"}
+                  {r.status === "confirmed" ? t("m3.donorConfirmed") : t("common.open")}
                 </p>
               </div>
               <div className="flex w-full flex-wrap gap-2 sm:w-auto">
@@ -210,7 +212,7 @@ function DonorsPage() {
                   onClick={() => setOpenRequestId(openRequestId === r.id ? null : r.id)}
                   className="rounded-xl border border-border px-4 py-2 text-sm font-semibold hover:bg-accent"
                 >
-                  {openRequestId === r.id ? "Hide donors" : "Matched donors"}
+                  {openRequestId === r.id ? t("m3.btn.hideDonors") : t("m3.btn.matchedDonors")}
                 </button>
                 {r.status === "open" && r.notification_round < 3 && (
                   <button
@@ -218,7 +220,7 @@ function DonorsPage() {
                     onClick={() => advance.mutate(r.id)}
                     className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
                   >
-                    <Radio className="size-4" /> Widen to round {r.notification_round + 1}
+                    <Radio className="size-4" /> {t("m3.btn.widenRound")} {r.notification_round + 1}
                   </button>
                 )}
               </div>
@@ -229,29 +231,28 @@ function DonorsPage() {
         ))}
         {(requests.data ?? []).length === 0 && !requests.isLoading && (
           <Card>
-            <p className="text-sm text-muted-foreground">No blood requests yet.</p>
+            <p className="text-sm text-muted-foreground">{t("m3.noRequests")}</p>
           </Card>
         )}
       </div>
 
-      <h2 className="mb-3 mt-8 text-xl font-bold">Donor register</h2>
+      <h2 className="mb-3 mt-8 text-xl font-bold">{t("m3.section.donorRegister")}</h2>
       <Card>
         <p className="mb-3 flex items-start gap-2 text-sm text-muted-foreground">
           <EyeOff className="mt-0.5 size-4 shrink-0" />
-          Phone numbers are stored but never sent to any screen. Blood bank staff see an area name,
-          an approximate distance and availability only; contact happens through the blood bank.
+          {t("m3.privacyNote")}
         </p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="text-left text-muted-foreground">
               <tr>
-                <th className="py-2 pr-4">Donor</th>
-                <th className="py-2 pr-4">Group</th>
-                <th className="py-2 pr-4">Area</th>
-                <th className="py-2 pr-4">Approx. distance</th>
-                <th className="py-2 pr-4">Availability</th>
-                <th className="py-2 pr-4">Donations</th>
-                <th className="py-2">Response rate</th>
+                <th className="py-2 pr-4">{t("m3.th.donor")}</th>
+                <th className="py-2 pr-4">{t("m3.th.group")}</th>
+                <th className="py-2 pr-4">{t("m3.th.area")}</th>
+                <th className="py-2 pr-4">{t("m3.th.distance")}</th>
+                <th className="py-2 pr-4">{t("m3.th.availability")}</th>
+                <th className="py-2 pr-4">{t("m3.th.donations")}</th>
+                <th className="py-2">{t("m3.th.responseRate")}</th>
               </tr>
             </thead>
             <tbody>
@@ -275,6 +276,7 @@ function DonorsPage() {
 }
 
 function MatchedDonors({ requestId, onChange }: { requestId: string; onChange: () => void }) {
+  const { t } = useI18n();
   const fetchRanked = useServerFn(rankedDonors);
   const confirm = useServerFn(confirmDonor);
   const ranked = useQuery({
@@ -293,11 +295,9 @@ function MatchedDonors({ requestId, onChange }: { requestId: string; onChange: (
 
   return (
     <div className="mt-4 rounded-xl border border-border bg-muted/50 p-4">
-      <h3 className="font-bold">Ranked donors</h3>
+      <h3 className="font-bold">{t("m3.rankedTitle")}</h3>
       <p className="text-sm text-muted-foreground">
-        Score out of 100: compatibility {SCORE_WEIGHTS.compatibility}, proximity{" "}
-        {SCORE_WEIGHTS.proximity}, availability {SCORE_WEIGHTS.availability}, response history{" "}
-        {SCORE_WEIGHTS.responseHistory}. Ordering only — it is never a medical judgement.
+        {t("m3.scoreExpl")}
       </p>
       <ul className="mt-3 space-y-2">
         {(ranked.data ?? []).map((d) => (
@@ -321,10 +321,10 @@ function MatchedDonors({ requestId, onChange }: { requestId: string; onChange: (
               <div className="text-sm">
                 {d.notified_round ? (
                   <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold">
-                    Round {d.notified_round} · {d.response}
+                    {t("m3.round")} {d.notified_round} · {d.response}
                   </span>
                 ) : (
-                  <span className="text-xs text-muted-foreground">Not notified yet</span>
+                  <span className="text-xs text-muted-foreground">{t("m3.notNotified")}</span>
                 )}
               </div>
               <button
@@ -332,14 +332,14 @@ function MatchedDonors({ requestId, onChange }: { requestId: string; onChange: (
                 onClick={() => mutation.mutate(d.id)}
                 className="rounded-xl border border-border px-4 py-2 text-sm font-semibold hover:bg-accent"
               >
-                Confirm donor
+                {t("m3.btn.confirmDonor")}
               </button>
             </div>
           </li>
         ))}
         {(ranked.data ?? []).length === 0 && (
           <li className="text-sm text-muted-foreground">
-            No compatible donor inside this round's radius yet — widen the round.
+            {t("m3.noCompatible")}
           </li>
         )}
       </ul>
@@ -354,6 +354,7 @@ function RequestForm({
   patients: { id: string; name: string; patient_code: string; district: string }[];
   onDone: () => void;
 }) {
+  const { t } = useI18n();
   const create = useServerFn(createBloodRequest);
   const [form, setForm] = useState({
     patientId: patients[0]?.id ?? "",
@@ -378,7 +379,7 @@ function RequestForm({
     return (
       <Card className="mb-5">
         <p className="text-sm text-muted-foreground">
-          No eligible patients: a blood request needs a documented confirmatory result of Disease.
+          {t("m3.form.noEligible")}
         </p>
       </Card>
     );
@@ -386,7 +387,7 @@ function RequestForm({
 
   return (
     <Card className="mb-5">
-      <h2 className="text-lg font-bold">New blood request</h2>
+      <h2 className="text-lg font-bold">{t("m3.form.newRequestTitle")}</h2>
       <form
         className="mt-4 grid gap-3 sm:grid-cols-2"
         onSubmit={(e) => {
@@ -395,7 +396,7 @@ function RequestForm({
         }}
       >
         <label className="text-sm sm:col-span-2">
-          <span className="block font-semibold">Patient (documented Disease only)</span>
+          <span className="block font-semibold">{t("m3.form.patientLabel")}</span>
           <select
             value={form.patientId}
             onChange={(e) => setForm({ ...form, patientId: e.target.value })}
@@ -409,7 +410,7 @@ function RequestForm({
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Blood group needed</span>
+          <span className="block font-semibold">{t("m3.bloodGroup")}</span>
           <select
             value={form.blood_group_needed}
             onChange={(e) => setForm({ ...form, blood_group_needed: e.target.value })}
@@ -423,7 +424,7 @@ function RequestForm({
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Component</span>
+          <span className="block font-semibold">{t("m3.form.component")}</span>
           <select
             value={form.component}
             onChange={(e) => setForm({ ...form, component: e.target.value })}
@@ -435,7 +436,7 @@ function RequestForm({
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Units</span>
+          <span className="block font-semibold">{t("m3.units")}</span>
           <input
             type="number"
             min={1}
@@ -446,7 +447,7 @@ function RequestForm({
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Urgency</span>
+          <span className="block font-semibold">{t("m3.urgency")}</span>
           <select
             value={form.urgency_level}
             onChange={(e) =>
@@ -462,7 +463,7 @@ function RequestForm({
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Hospital / blood bank</span>
+          <span className="block font-semibold">{t("m3.form.hospital")}</span>
           <input
             required
             value={form.hospital_name}
@@ -471,7 +472,7 @@ function RequestForm({
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Required by</span>
+          <span className="block font-semibold">{t("m3.form.requiredBy")}</span>
           <input
             type="date"
             value={form.required_by}
@@ -485,7 +486,7 @@ function RequestForm({
             disabled={mutation.isPending}
             className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground disabled:opacity-60"
           >
-            Create request and notify round 1
+            {t("m3.form.submitRequest")}
           </button>
         </div>
       </form>
@@ -494,6 +495,7 @@ function RequestForm({
 }
 
 function DonorForm({ onDone }: { onDone: () => void }) {
+  const { t } = useI18n();
   const register = useServerFn(registerDonor);
   const [form, setForm] = useState({
     blood_group: "O+",
@@ -515,10 +517,9 @@ function DonorForm({ onDone }: { onDone: () => void }) {
 
   return (
     <Card className="mb-5">
-      <h2 className="text-lg font-bold">Register a donor</h2>
+      <h2 className="text-lg font-bold">{t("m3.form.registerDonorTitle")}</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        The phone number is kept private on the server; only the area, approximate distance and
-        availability are ever shown.
+        {t("m3.form.privacyNote")}
       </p>
       <form
         className="mt-4 grid gap-3 sm:grid-cols-2"
@@ -528,7 +529,7 @@ function DonorForm({ onDone }: { onDone: () => void }) {
         }}
       >
         <label className="text-sm">
-          <span className="block font-semibold">Blood group</span>
+          <span className="block font-semibold">{t("m3.bloodGroup")}</span>
           <select
             value={form.blood_group}
             onChange={(e) => setForm({ ...form, blood_group: e.target.value })}
@@ -542,7 +543,7 @@ function DonorForm({ onDone }: { onDone: () => void }) {
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">General area</span>
+          <span className="block font-semibold">{t("m3.form.generalArea")}</span>
           <input
             required
             value={form.general_location}
@@ -552,7 +553,7 @@ function DonorForm({ onDone }: { onDone: () => void }) {
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Approximate distance (km)</span>
+          <span className="block font-semibold">{t("m3.form.approxDist")}</span>
           <input
             type="number"
             min={0}
@@ -563,7 +564,7 @@ function DonorForm({ onDone }: { onDone: () => void }) {
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Availability</span>
+          <span className="block font-semibold">{t("m3.form.availability")}</span>
           <select
             value={form.availability_status}
             onChange={(e) =>
@@ -582,7 +583,7 @@ function DonorForm({ onDone }: { onDone: () => void }) {
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Past donations</span>
+          <span className="block font-semibold">{t("m3.form.pastDonations")}</span>
           <input
             type="number"
             min={0}
@@ -592,7 +593,7 @@ function DonorForm({ onDone }: { onDone: () => void }) {
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Phone (kept private)</span>
+          <span className="block font-semibold">{t("m3.form.phonePrivate")}</span>
           <input
             required
             value={form.private_phone}
@@ -606,7 +607,7 @@ function DonorForm({ onDone }: { onDone: () => void }) {
             disabled={mutation.isPending}
             className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground disabled:opacity-60"
           >
-            Add donor
+            {t("m3.form.addDonor")}
           </button>
         </div>
       </form>

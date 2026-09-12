@@ -260,7 +260,7 @@ function TrackerPage() {
       {patients.isError && !patients.data && (
         <Card className="mb-4 border-warn bg-warn/10">
           <p className="text-sm">
-            No saved copy on this device yet. Turn demo offline mode off to load the list.
+            {t("m1.noSavedCopy")}
           </p>
         </Card>
       )}
@@ -294,17 +294,16 @@ function TrackerPage() {
                   </span>
                   {p.status === "confirmed_documented" && (
                     <p className="mt-2 text-sm">
-                      <strong>{p.confirmed_result}</strong> · report {p.report_reference}
+                      <strong>{p.confirmed_result}</strong> · {t("m2.reportSlip")} {p.report_reference}
                     </p>
                   )}
                   {p.status === "confirmed_unverified" && (
                     <p className="mt-2 text-sm text-muted-foreground">
-                      Patient says they were tested, but no report slip has been seen. No care record
-                      or donor request can be opened.
+                      {t("m1.unverifiedNote")}
                     </p>
                   )}
                   <p className="mt-1 text-xs text-muted-foreground">
-                    {p.reminders_sent} reminder{p.reminders_sent === 1 ? "" : "s"} logged
+                    {p.reminders_sent} {p.reminders_sent === 1 ? t("m1.reminderLogged") : t("m1.remindersLogged")}
                   </p>
                 </div>
 
@@ -339,7 +338,7 @@ function TrackerPage() {
         })}
         {rows.length === 0 && !patients.isLoading && (
           <Card>
-            <p className="text-sm text-muted-foreground">Nobody matches these filters.</p>
+            <p className="text-sm text-muted-foreground">{t("m1.noMatch")}</p>
           </Card>
         )}
       </div>
@@ -348,6 +347,7 @@ function TrackerPage() {
 }
 
 function IntakeForm({ onDone }: { onDone: () => void }) {
+  const { t } = useI18n();
   const add = useServerFn(createPatient);
   const [form, setForm] = useState({
     name: "",
@@ -369,10 +369,9 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
 
   return (
     <Card className="mb-5">
-      <h2 className="text-lg font-bold">Add a screened person</h2>
+      <h2 className="text-lg font-bold">{t("m1.form.title")}</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        In production this list would arrive from the national screening database; manual entry
-        stands in for that feed here.
+        {t("m1.form.desc")}
       </p>
       <form
         className="mt-4 grid gap-3 sm:grid-cols-2"
@@ -382,7 +381,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
         }}
       >
         <label className="text-sm">
-          <span className="block font-semibold">Name</span>
+          <span className="block font-semibold">{t("m1.form.name")}</span>
           <input
             required
             value={form.name}
@@ -391,7 +390,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Phone number</span>
+          <span className="block font-semibold">{t("m3.form.phonePrivate")}</span>
           <input
             required
             value={form.phone_number}
@@ -400,7 +399,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Preferred language</span>
+          <span className="block font-semibold">{t("m1.form.prefLang")}</span>
           <select
             value={form.preferred_language}
             onChange={(e) => setForm({ ...form, preferred_language: e.target.value as LangCode })}
@@ -414,7 +413,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">District</span>
+          <span className="block font-semibold">{t("m1.filter.district")}</span>
           <select
             value={form.district}
             onChange={(e) => setForm({ ...form, district: e.target.value })}
@@ -428,7 +427,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">PHC / sub-centre</span>
+          <span className="block font-semibold">{t("m1.form.phc")}</span>
           <input
             required
             value={form.phc}
@@ -437,7 +436,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
           />
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Screening date</span>
+          <span className="block font-semibold">{t("m1.form.screenDate")}</span>
           <input
             type="date"
             required
@@ -452,7 +451,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
             disabled={mutation.isPending}
             className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground disabled:opacity-60"
           >
-            Save to tracker
+            {t("m1.form.saveBtn")}
           </button>
         </div>
       </form>
@@ -461,6 +460,7 @@ function IntakeForm({ onDone }: { onDone: () => void }) {
 }
 
 function ReminderPanel({ patient, onDone }: { patient: PatientRow; onDone: () => void }) {
+  const { t } = useI18n();
   const send = useServerFn(sendReminder);
   const fetchLog = useServerFn(listReminders);
   const [language, setLanguage] = useState<LangCode>(patient.preferred_language as LangCode);
@@ -484,14 +484,13 @@ function ReminderPanel({ patient, onDone }: { patient: PatientRow; onDone: () =>
 
   return (
     <div className="mt-4 rounded-xl border border-border bg-muted/50 p-4">
-      <h3 className="font-bold">Reminder for {patient.name}</h3>
+      <h3 className="font-bold">{t("m1.reminder.title")} {patient.name}</h3>
       <p className="text-sm text-muted-foreground">
-        Simulated dispatch: the message is recorded in the activity log. No SMS or call is actually
-        sent in this demonstration environment.
+        {t("m1.reminder.desc")}
       </p>
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label className="text-sm">
-          <span className="block font-semibold">Language</span>
+          <span className="block font-semibold">{t("m1.form.prefLang")}</span>
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value as LangCode)}
@@ -505,7 +504,7 @@ function ReminderPanel({ patient, onDone }: { patient: PatientRow; onDone: () =>
           </select>
         </label>
         <label className="text-sm">
-          <span className="block font-semibold">Channel</span>
+          <span className="block font-semibold">{t("m1.reminder.channel")}</span>
           <select
             value={channel}
             onChange={(e) => setChannel(e.target.value as "SMS" | "IVR")}
@@ -521,10 +520,10 @@ function ReminderPanel({ patient, onDone }: { patient: PatientRow; onDone: () =>
           disabled={mutation.isPending}
           className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 font-semibold text-primary-foreground disabled:opacity-60"
         >
-          <PhoneCall className="size-4" /> Send now
+          <PhoneCall className="size-4" /> {t("m1.reminder.sendNow")}
         </button>
         <button type="button" onClick={onDone} className="rounded-xl border border-border px-4 py-2 font-semibold">
-          Done
+          {t("m1.reminder.done")}
         </button>
       </div>
 
@@ -538,7 +537,7 @@ function ReminderPanel({ patient, onDone }: { patient: PatientRow; onDone: () =>
           </li>
         ))}
         {(log.data ?? []).length === 0 && (
-          <li className="text-sm text-muted-foreground">No reminders logged yet.</li>
+          <li className="text-sm text-muted-foreground">{t("m1.reminder.none")}</li>
         )}
       </ul>
     </div>
@@ -546,6 +545,7 @@ function ReminderPanel({ patient, onDone }: { patient: PatientRow; onDone: () =>
 }
 
 function ClosePanel({ patient, onDone }: { patient: PatientRow; onDone: () => void }) {
+  const { t } = useI18n();
   const close = useServerFn(closePatient);
   const [outcome, setOutcome] = useState<"confirmed_unverified" | "confirmed_documented">(
     "confirmed_documented",
@@ -570,7 +570,7 @@ function ClosePanel({ patient, onDone }: { patient: PatientRow; onDone: () => vo
 
   return (
     <div className="mt-4 rounded-xl border border-border bg-muted/50 p-4">
-      <h3 className="font-bold">Close the follow-up for {patient.name}</h3>
+      <h3 className="font-bold">{t("m1.close.title")} {patient.name}</h3>
       <div className="mt-3 space-y-3">
         <label className="flex items-start gap-3 rounded-xl border border-border bg-card p-3 text-sm">
           <input
@@ -581,8 +581,7 @@ function ClosePanel({ patient, onDone }: { patient: PatientRow; onDone: () => vo
             className="mt-1"
           />
           <span>
-            <strong>Report slip seen</strong> — the confirmatory report is in hand. This unlocks the
-            portable care record.
+            <strong>{t("m1.close.optDocumentedTitle")}</strong> {t("m1.close.optDocumentedDesc")}
           </span>
         </label>
         <label className="flex items-start gap-3 rounded-xl border border-border bg-card p-3 text-sm">
@@ -594,15 +593,14 @@ function ClosePanel({ patient, onDone }: { patient: PatientRow; onDone: () => vo
             className="mt-1"
           />
           <span>
-            <strong>Says tested, no report seen</strong> — the follow-up stops here, but nothing
-            downstream is unlocked.
+            <strong>{t("m1.close.optUnverifiedTitle")}</strong> {t("m1.close.optUnverifiedDesc")}
           </span>
         </label>
 
         {outcome === "confirmed_documented" && (
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="text-sm">
-              <span className="block font-semibold">Report slip reference</span>
+              <span className="block font-semibold">{t("m1.close.refLabel")}</span>
               <input
                 value={reportReference}
                 onChange={(e) => setReportReference(e.target.value)}
@@ -611,15 +609,15 @@ function ClosePanel({ patient, onDone }: { patient: PatientRow; onDone: () => vo
               />
             </label>
             <label className="text-sm">
-              <span className="block font-semibold">Confirmatory result</span>
+              <span className="block font-semibold">{t("m2.confirmatoryResult")}</span>
               <select
                 value={result}
                 onChange={(e) => setResult(e.target.value as typeof result)}
                 className="mt-1 w-full rounded-xl border border-input bg-background px-3 py-2 text-base"
               >
-                <option value="Non-carrier">Non-carrier</option>
-                <option value="Carrier">Carrier</option>
-                <option value="Disease">Disease</option>
+                <option value="Non-carrier">{t("m1.result.nonCarrier")}</option>
+                <option value="Carrier">{t("m1.result.carrier")}</option>
+                <option value="Disease">{t("m1.result.disease")}</option>
               </select>
             </label>
           </div>
@@ -635,10 +633,10 @@ function ClosePanel({ patient, onDone }: { patient: PatientRow; onDone: () => vo
             }
             className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground disabled:opacity-60"
           >
-            Close record
+            {t("m1.close")}
           </button>
           <button type="button" onClick={onDone} className="rounded-xl border border-border px-5 py-3 font-semibold">
-            Cancel
+            {t("common.cancel")}
           </button>
         </div>
       </div>

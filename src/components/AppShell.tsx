@@ -51,7 +51,7 @@ export function OfflineToggle() {
       </button>
       {syncing && (
         <span className="flex items-center gap-1 text-sm text-primary">
-          <Loader2 className="size-4 animate-spin" /> syncing…
+          <Loader2 className="size-4 animate-spin" /> {t("common.syncing")}
         </span>
       )}
       {!syncing && queue.length > 0 && (
@@ -164,8 +164,16 @@ export function AppShell({
         </div>
         {who && (
           <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 pb-3 text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">{who.name}</span>
-            <span>{who.facility}</span>
+            <span className="font-semibold text-foreground">
+              {who.name === "Health worker" ? t("role.health_worker_name") : who.name}
+            </span>
+            <span>
+              {who.facility === "Local PHC"
+                ? t("role.local_phc")
+                : who.facility === "Field team"
+                  ? t("role.field_team")
+                  : who.facility}
+            </span>
             {who.roles.map((r) => (
               <span key={r} className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
                 {r === "health_worker" ? t("role.health_worker") : t("role.blood_bank")}
@@ -214,9 +222,9 @@ export function OfflineBanner({ lastSynced }: { lastSynced?: string | null }) {
     <div className="mb-4 flex items-center gap-3 rounded-2xl border border-warn bg-warn/15 p-4 text-sm text-warn-foreground">
       <CloudOff className="size-5 shrink-0" />
       <p>
-        <strong>{t("common.offlineOn")}.</strong> Showing the copy saved on this device
+        <strong>{t("common.offlineOn")}.</strong> {t("offline.banner")}
         {lastSynced ? ` — ${t("common.lastSynced").toLowerCase()} ${new Date(lastSynced).toLocaleString()}` : ""}.
-        Changes you make now are queued and sent when you reconnect.
+        {" "}{t("offline.bannerQueue")}
       </p>
     </div>
   );

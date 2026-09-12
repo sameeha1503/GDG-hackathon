@@ -129,8 +129,7 @@ function RecordsPage() {
       <Card className="mb-5 border-primary/40 bg-secondary/40">
         <p className="flex items-start gap-2 text-sm">
           <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" />
-          Only people whose confirmatory report has actually been seen appear here. The server
-          re-checks that rule on every attempt, so an unverified record can never get a QR code.
+          {t("m2.policyAlert")}
         </p>
       </Card>
 
@@ -138,15 +137,16 @@ function RecordsPage() {
         <Card className="mb-5 border-warn bg-warn/10">
           <div className="flex flex-wrap items-center gap-3">
             <p className="text-sm">
-              <strong>{queue.length}</strong> treatment update
-              {queue.length === 1 ? "" : "s"} saved on this device, waiting to sync.
+              <strong>{queue.length}</strong>{" "}
+              {queue.length === 1 ? t("m2.queueBanner1") : t("m2.queueBannerPlural")}{" "}
+              {t("m2.queueBanner2")}
             </p>
             <button
               type="button"
               onClick={flushQueue}
               className="ml-auto flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
             >
-              <RefreshCw className="size-4" /> Sync now
+              <RefreshCw className="size-4" /> {t("m2.btn.syncNow")}
             </button>
           </div>
         </Card>
@@ -154,7 +154,7 @@ function RecordsPage() {
 
       {records.isError && !records.data && (
         <Card className="mb-4 border-warn bg-warn/10">
-          <p className="text-sm">No saved copy on this device yet — go back online to load records.</p>
+          <p className="text-sm">{t("m2.noSavedCopy")}</p>
         </Card>
       )}
 
@@ -181,7 +181,7 @@ function RecordsPage() {
         {(records.data ?? []).length === 0 && !records.isLoading && (
           <Card>
             <p className="text-sm text-muted-foreground">
-              No documented patients yet. Close a follow-up with a report slip in the tracker first.
+              {t("m2.noDocumented")}
             </p>
           </Card>
         )}
@@ -213,6 +213,7 @@ function RecordCard({
   onCreate: (facility: string, treatmentStatus: string) => void;
   onUpdate: (recordId: string, treatmentStatus: string, facility: string) => void;
 }) {
+  const { t } = useI18n();
   const [facility, setFacility] = useState(record?.last_updated_facility ?? patient.phc);
   const [treatment, setTreatment] = useState(
     record?.treatment_status ?? "Hydroxyurea started, folic acid daily",
@@ -229,22 +230,22 @@ function RecordCard({
           </p>
           <dl className="mt-3 space-y-1 text-sm">
             <div className="flex gap-2">
-              <dt className="text-muted-foreground">Confirmatory result</dt>
+              <dt className="text-muted-foreground">{t("m2.confirmatoryResult")}</dt>
               <dd className="font-semibold">{patient.confirmed_result}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-muted-foreground">Report slip</dt>
+              <dt className="text-muted-foreground">{t("m2.reportSlip")}</dt>
               <dd className="font-mono">{patient.report_reference}</dd>
             </div>
             {record && (
               <div className="flex gap-2">
-                <dt className="text-muted-foreground">ABHA</dt>
+                <dt className="text-muted-foreground">{t("m2.abha")}</dt>
                 <dd className="font-mono">{record.mock_abha_id}</dd>
               </div>
             )}
             {record && (
               <div className="flex gap-2">
-                <dt className="text-muted-foreground">Last updated</dt>
+                <dt className="text-muted-foreground">{t("m2.lastUpdated")}</dt>
                 <dd>
                   {new Date(record.last_updated_date).toLocaleDateString()} ·{" "}
                   {record.last_updated_facility}
@@ -255,7 +256,7 @@ function RecordCard({
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <label className="text-sm">
-              <span className="block font-semibold">Treatment status</span>
+              <span className="block font-semibold">{t("m2.treatmentStatus")}</span>
               <input
                 value={treatment}
                 onChange={(e) => setTreatment(e.target.value)}
@@ -263,7 +264,7 @@ function RecordCard({
               />
             </label>
             <label className="text-sm">
-              <span className="block font-semibold">Facility</span>
+              <span className="block font-semibold">{t("m3.form.hospital")}</span>
               <input
                 value={facility}
                 onChange={(e) => setFacility(e.target.value)}
@@ -278,7 +279,7 @@ function RecordCard({
                 onClick={() => onUpdate(record.record_id, treatment, facility)}
                 className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground"
               >
-                {offline ? "Save on this device" : "Save update"}
+                {offline ? t("m2.btn.saveLocal") : t("m2.btn.saveUpdate")}
               </button>
             ) : (
               <button
@@ -286,7 +287,7 @@ function RecordCard({
                 onClick={() => onCreate(facility, treatment)}
                 className="flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground"
               >
-                <QrCode className="size-5" /> Create QR care record
+                <QrCode className="size-5" /> {t("m2.btn.createQr")}
               </button>
             )}
           </div>
