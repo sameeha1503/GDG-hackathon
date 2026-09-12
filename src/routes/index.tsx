@@ -107,13 +107,6 @@ function Index() {
               <Heart className="size-4 fill-white" />
               {t("home.hero.signin")}
             </Link>
-            <Link
-              to="/lookup"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-card/80 px-6 py-3.5 text-base font-semibold text-foreground shadow-xs transition-all hover:bg-secondary hover:border-primary/40 active:scale-98"
-            >
-              <QrCode className="size-4 text-primary" />
-              {t("nav.lookup")}
-            </Link>
           </div>
         </div>
       </div>
