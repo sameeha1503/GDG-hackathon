@@ -103,7 +103,7 @@ export function AppShell({
             </span>
             <span className="leading-tight">
               <span className="block text-lg font-bold">{t("app.name")}</span>
-              <span className="block text-xs text-muted-foreground">NSCAEM prototype</span>
+              <span className="block text-xs text-muted-foreground">{t("app.subtitle")}</span>
             </span>
           </Link>
 
@@ -161,7 +161,7 @@ export function AppShell({
             <span>{who.facility}</span>
             {who.roles.map((r) => (
               <span key={r} className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                {r === "health_worker" ? "ASHA / PHC worker" : "Blood bank staff"}
+                {r === "health_worker" ? t("role.health_worker") : t("role.blood_bank")}
               </span>
             ))}
             <span className="ml-auto">
@@ -172,8 +172,7 @@ export function AppShell({
       </header>
       <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
       <footer className="mx-auto max-w-6xl px-4 pb-10 pt-4 text-xs text-muted-foreground">
-        Prototype for the National Sickle Cell Anaemia Elimination Mission. Reminders, ABHA IDs and
-        donor outreach are simulated for demonstration; no messages are actually sent.
+        {t("app.footer")}
       </footer>
     </div>
   );

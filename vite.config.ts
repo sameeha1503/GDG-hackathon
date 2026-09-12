@@ -40,6 +40,9 @@ export default defineConfig(async ({ command }) => {
     },
     server: {
       port: 8080,
+      watch: {
+        ignored: ["**/.output/**"],
+      },
     },
   };
 });

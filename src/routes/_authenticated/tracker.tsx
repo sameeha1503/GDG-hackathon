@@ -63,6 +63,19 @@ function TrackerPage() {
   const queryClient = useQueryClient();
   const fetchPatients = useServerFn(listPatients);
 
+  const bandLabel: Record<string, string> = {
+    on_track: t("m1.band.on_track"),
+    d7: t("m1.band.d7"),
+    d14: t("m1.band.d14"),
+    d21: t("m1.band.d21"),
+  };
+
+  const statusLabel: Record<string, string> = {
+    awaiting_confirmation: t("m1.status.awaiting"),
+    confirmed_unverified: t("m1.status.unverified"),
+    confirmed_documented: t("m1.status.documented"),
+  };
+
   const [statusFilter, setStatusFilter] = useState("awaiting_confirmation");
   const [bandFilter, setBandFilter] = useState("all");
   const [districtFilter, setDistrictFilter] = useState("all");
@@ -115,10 +128,10 @@ function TrackerPage() {
 
       <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
-          { label: "Awaiting confirmation", value: counts.waiting, tone: "bg-secondary" },
-          { label: "Overdue 7+ days", value: counts.d7, tone: "bg-warn/25" },
-          { label: "Overdue 14+ days", value: counts.d14, tone: "bg-warn/45" },
-          { label: "Overdue 21+ days", value: counts.d21, tone: "bg-destructive/15" },
+          { label: t("m1.stat.waiting"), value: counts.waiting, tone: "bg-secondary" },
+          { label: t("m1.stat.d7"), value: counts.d7, tone: "bg-warn/25" },
+          { label: t("m1.stat.d14"), value: counts.d14, tone: "bg-warn/45" },
+          { label: t("m1.stat.d21"), value: counts.d21, tone: "bg-destructive/15" },
         ].map((s) => (
           <div key={s.label} className={cn("rounded-2xl border border-border p-4", s.tone)}>
             <p className="text-3xl font-bold">{s.value}</p>
@@ -134,19 +147,19 @@ function TrackerPage() {
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Name or code"
+              placeholder={t("m1.searchPlaceholder")}
               className="mt-1 rounded-xl border border-input bg-background px-3 py-2 text-base"
             />
           </label>
           <label className="text-sm">
-            <span className="block font-semibold">Status</span>
+            <span className="block font-semibold">{t("m1.filter.status")}</span>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="mt-1 rounded-xl border border-input bg-background px-3 py-2 text-base"
             >
               <option value="all">{t("common.all")}</option>
-              {Object.entries(STATUS_LABEL).map(([k, v]) => (
+              {Object.entries(statusLabel).map(([k, v]) => (
                 <option key={k} value={k}>
                   {v}
                 </option>
@@ -154,14 +167,14 @@ function TrackerPage() {
             </select>
           </label>
           <label className="text-sm">
-            <span className="block font-semibold">Overdue band</span>
+            <span className="block font-semibold">{t("m1.filter.band")}</span>
             <select
               value={bandFilter}
               onChange={(e) => setBandFilter(e.target.value)}
               className="mt-1 rounded-xl border border-input bg-background px-3 py-2 text-base"
             >
               <option value="all">{t("common.all")}</option>
-              {Object.entries(BAND_LABEL).map(([k, v]) => (
+              {Object.entries(bandLabel).map(([k, v]) => (
                 <option key={k} value={k}>
                   {v}
                 </option>
@@ -169,7 +182,7 @@ function TrackerPage() {
             </select>
           </label>
           <label className="text-sm">
-            <span className="block font-semibold">District</span>
+            <span className="block font-semibold">{t("m1.filter.district")}</span>
             <select
               value={districtFilter}
               onChange={(e) => setDistrictFilter(e.target.value)}
@@ -184,14 +197,14 @@ function TrackerPage() {
             </select>
           </label>
           <label className="text-sm">
-            <span className="block font-semibold">Sort by</span>
+            <span className="block font-semibold">{t("m1.filter.sort")}</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as "waiting" | "name")}
               className="mt-1 rounded-xl border border-input bg-background px-3 py-2 text-base"
             >
-              <option value="waiting">Longest waiting first</option>
-              <option value="name">Name</option>
+              <option value="waiting">{t("m1.sort.waiting")}</option>
+              <option value="name">{t("m1.sort.name")}</option>
             </select>
           </label>
           <button
@@ -238,8 +251,8 @@ function TrackerPage() {
                   >
                     {band !== "on_track" && <AlertTriangle className="size-4" />}
                     {p.status === "awaiting_confirmation"
-                      ? `${p.days_waiting} ${t("common.days")} — ${BAND_LABEL[band]}`
-                      : STATUS_LABEL[p.status]}
+                      ? `${p.days_waiting} ${t("common.days")} — ${bandLabel[band]}`
+                      : statusLabel[p.status]}
                   </span>
                   {p.status === "confirmed_documented" && (
                     <p className="mt-2 text-sm">

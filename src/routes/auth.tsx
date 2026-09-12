@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell, Card, SectionHeading } from "@/components/AppShell";
 import { DEMO_ACCOUNTS, ensureDemoAccounts } from "@/lib/demo.functions";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
+  const { t } = useI18n();
   const navigate = useNavigate();
   const seedDemo = useServerFn(ensureDemoAccounts);
   const [email, setEmail] = useState(DEMO_ACCOUNTS[0]!.email);
@@ -49,8 +51,8 @@ function AuthPage() {
     <AppShell>
       <div className="mx-auto max-w-lg">
         <SectionHeading
-          title="Sign in"
-          subtitle="Health workers see full records. Anyone can still check whether a QR record exists, without any medical detail."
+          title={t("auth.title")}
+          subtitle={t("auth.subtitle")}
         />
         <Card>
           <form
@@ -62,7 +64,7 @@ function AuthPage() {
           >
             <div>
               <label htmlFor="email" className="block text-sm font-semibold">
-                Email
+                {t("common.email")}
               </label>
               <input
                 id="email"
@@ -76,7 +78,7 @@ function AuthPage() {
             </div>
             <div>
               <label htmlFor="password" className="block text-sm font-semibold">
-                Password
+                {t("common.password")}
               </label>
               <input
                 id="password"
@@ -93,12 +95,12 @@ function AuthPage() {
               disabled={signIn.isPending}
               className="w-full rounded-xl bg-primary px-6 py-3 text-base font-semibold text-primary-foreground disabled:opacity-60"
             >
-              {signIn.isPending ? "Signing in…" : "Sign in"}
+              {signIn.isPending ? t("auth.signingIn") : t("auth.signinBtn")}
             </button>
           </form>
 
           <div className="mt-6 border-t border-border pt-4">
-            <p className="text-sm font-semibold">Demo logins</p>
+            <p className="text-sm font-semibold">{t("auth.demoAccounts")}</p>
             <div className="mt-2 space-y-2">
               {DEMO_ACCOUNTS.map((a) => (
                 <button

@@ -75,13 +75,13 @@ function LookupPage() {
   return (
     <AppShell>
       <SectionHeading
-        title={t("nav.lookup")}
-        subtitle="Point the camera at a patient's Rakt-Link QR code, or type the reference printed under it."
+        title={t("lookup.title")}
+        subtitle={t("lookup.subtitle")}
       />
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
-          <h2 className="text-lg font-bold">Camera scan</h2>
+          <h2 className="text-lg font-bold">{t("lookup.cameraScan")}</h2>
           {scanning ? (
             <div className="mt-3 overflow-hidden rounded-xl border border-border bg-black">
               <video ref={videoRef} className="w-full" muted playsInline />
@@ -95,7 +95,7 @@ function LookupPage() {
               }}
               className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 font-semibold text-primary-foreground"
             >
-              <Camera className="size-5" /> Start camera
+              <Camera className="size-5" /> {t("lookup.startCamera")}
             </button>
           )}
           {scanning && (
@@ -111,7 +111,7 @@ function LookupPage() {
         </Card>
 
         <Card>
-          <h2 className="text-lg font-bold">Type the reference</h2>
+          <h2 className="text-lg font-bold">{t("lookup.manualEntry")}</h2>
           <form
             className="mt-3 space-y-3"
             onSubmit={(e) => {
@@ -122,7 +122,7 @@ function LookupPage() {
             <input
               value={reference}
               onChange={(e) => setReference(e.target.value.toUpperCase())}
-              placeholder="RL-XXXXXX"
+              placeholder={t("lookup.placeholder")}
               aria-label="Care record reference"
               className="w-full rounded-xl border border-input bg-background px-4 py-3 font-mono text-base"
             />
@@ -140,19 +140,18 @@ function LookupPage() {
               {check.data.exists ? (
                 <>
                   <p className="flex items-center gap-2 font-semibold text-ok">
-                    <CheckCircle2 className="size-5" /> This care record exists.
+                    <CheckCircle2 className="size-5" /> {t("lookup.recordFound")}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Medical details are not shown to unauthenticated users. A signed-in health
-                    worker can open the full record.
+                    {t("lookup.recordFoundNote")}
                   </p>
                   <Link to="/auth" className="mt-3 inline-flex text-sm font-semibold text-primary underline">
-                    Sign in to view it
+                    {t("lookup.signinToView")}
                   </Link>
                 </>
               ) : (
                 <p className="flex items-center gap-2 font-semibold text-destructive">
-                  <XCircle className="size-5" /> No record matches that reference.
+                  <XCircle className="size-5" /> {t("lookup.recordNotFound")}
                 </p>
               )}
             </div>
