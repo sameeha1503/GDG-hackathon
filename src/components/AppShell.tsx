@@ -18,7 +18,7 @@ export function LanguageSelector() {
         value={lang}
         onChange={(e) => setLang(e.target.value as typeof lang)}
         aria-label={t("common.language")}
-        className="rounded-lg border border-border bg-card px-3 py-2 text-base font-medium text-foreground"
+        className="rounded-xl border border-border/80 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-xs transition-all hover:border-border focus:border-primary focus:outline-none"
       >
         {LANGUAGES.map((l) => (
           <option key={l.code} value={l.code}>
@@ -95,12 +95,12 @@ export function AppShell({
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card/80 backdrop-blur">
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-50 border-b border-border/70 bg-card/85 backdrop-blur-md shadow-xs">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
-          <Link to="/" className="flex items-center gap-3">
-            <Logo />
-            <span className="text-xl font-bold tracking-tight text-foreground">
+          <Link to="/" className="group flex items-center gap-3 transition-transform active:scale-98">
+            <Logo className="transition-transform group-hover:scale-105" />
+            <span className="text-xl font-extrabold tracking-tight text-foreground transition-colors group-hover:text-primary">
               {t("app.name")}
             </span>
           </Link>
@@ -108,7 +108,7 @@ export function AppShell({
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="ml-auto rounded-lg border border-border px-3 py-2 md:hidden"
+            className="ml-auto rounded-xl border border-border/80 px-3 py-2 md:hidden"
             aria-label="Menu"
           >
             <Menu className="size-5" />
@@ -125,8 +125,8 @@ export function AppShell({
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                activeProps={{ className: "bg-secondary text-secondary-foreground" }}
-                className="rounded-lg px-3 py-2 text-base font-medium text-foreground hover:bg-accent"
+                activeProps={{ className: "bg-primary/10 text-primary font-semibold shadow-xs" }}
+                className="rounded-xl px-3.5 py-2 text-sm font-medium text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
               >
                 {t(item.key)}
               </Link>
@@ -139,7 +139,7 @@ export function AppShell({
               <button
                 type="button"
                 onClick={signOut}
-                className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-semibold hover:bg-accent"
+                className="flex items-center gap-2 rounded-xl border border-border/80 px-3.5 py-2 text-sm font-semibold hover:bg-secondary"
               >
                 <LogOut className="size-4" /> {t("nav.signout")}
               </button>
@@ -148,14 +148,14 @@ export function AppShell({
                 <Link
                   to="/auth"
                   search={{ mode: "signin" }}
-                  className="flex items-center rounded-lg border border-border px-3.5 py-2 text-sm font-semibold text-foreground hover:bg-accent"
+                  className="flex items-center rounded-xl border border-border/80 bg-card px-3.5 py-1.5 text-sm font-semibold text-foreground shadow-xs transition-all hover:bg-secondary hover:border-border"
                 >
                   {t("nav.signin")}
                 </Link>
                 <Link
                   to="/auth"
                   search={{ mode: "signup" }}
-                  className="flex items-center rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 shadow-sm"
+                  className="flex items-center rounded-xl bg-gradient-to-r from-rose-600 to-red-600 px-4 py-1.5 text-sm font-semibold text-white shadow-md shadow-rose-600/20 transition-all hover:from-rose-500 hover:to-red-500 hover:shadow-lg hover:shadow-rose-600/30 active:scale-98"
                 >
                   {t("nav.signup")}
                 </Link>
@@ -178,9 +178,15 @@ export function AppShell({
           </div>
         )}
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
-      <footer className="mx-auto max-w-6xl px-4 pb-10 pt-4 text-xs text-muted-foreground">
-        {t("app.footer")}
+      <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
+      <footer className="mt-16 border-t border-border/70 bg-card/60 py-10 text-xs text-muted-foreground">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 text-center">
+          <div className="flex items-center gap-2.5">
+            <Logo size="sm" />
+            <span className="text-sm font-extrabold tracking-tight text-foreground">{t("app.name")}</span>
+          </div>
+          <p className="max-w-2xl leading-relaxed">{t("app.footer")}</p>
+        </div>
       </footer>
     </div>
   );
@@ -188,16 +194,16 @@ export function AppShell({
 
 export function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
-    <div className="mb-5">
-      <h1 className="text-2xl font-bold text-foreground sm:text-3xl">{title}</h1>
-      {subtitle && <p className="mt-1 max-w-2xl text-base text-muted-foreground">{subtitle}</p>}
+    <div className="mb-6">
+      <h1 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">{title}</h1>
+      {subtitle && <p className="mt-1.5 max-w-2xl text-base text-muted-foreground">{subtitle}</p>}
     </div>
   );
 }
 
 export function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <section className={cn("rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5", className)}>
+    <section className={cn("rounded-2xl border border-border/80 bg-card p-5 shadow-xs transition-all duration-200 hover:border-border hover:shadow-sm sm:p-6", className)}>
       {children}
     </section>
   );

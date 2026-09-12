@@ -187,7 +187,7 @@ function AuthPage() {
                 <button
                   type="submit"
                   disabled={signIn.isPending}
-                  className="w-full rounded-xl bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-opacity hover:bg-primary/90 disabled:opacity-60"
+                  className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-red-600 px-6 py-3.5 text-base font-semibold text-white shadow-md shadow-rose-600/20 transition-all hover:from-rose-500 hover:to-red-500 hover:shadow-lg hover:shadow-rose-600/30 disabled:opacity-60 active:scale-99"
                 >
                   {signIn.isPending ? t("auth.signingIn") : t("auth.signinBtn")}
                 </button>
@@ -323,7 +323,7 @@ function AuthPage() {
                 <button
                   type="submit"
                   disabled={signUp.isPending}
-                  className="w-full rounded-xl bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-opacity hover:bg-primary/90 disabled:opacity-60"
+                  className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-red-600 px-6 py-3.5 text-base font-semibold text-white shadow-md shadow-rose-600/20 transition-all hover:from-rose-500 hover:to-red-500 hover:shadow-lg hover:shadow-rose-600/30 disabled:opacity-60 active:scale-99"
                 >
                   {signUp.isPending ? t("auth.signingUp") : t("auth.signupBtn")}
                 </button>
