@@ -1,11 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell, Card, SectionHeading } from "@/components/AppShell";
-import { DEMO_ACCOUNTS, ensureDemoAccounts } from "@/lib/demo.functions";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -37,13 +35,12 @@ function AuthPage() {
   const { t } = useI18n();
   const navigate = useNavigate();
   const search = Route.useSearch();
-  const seedDemo = useServerFn(ensureDemoAccounts);
 
   const [mode, setMode] = useState<"signin" | "signup">(search.mode ?? "signin");
 
   // Sign In fields
-  const [email, setEmail] = useState(DEMO_ACCOUNTS[0]!.email);
-  const [password, setPassword] = useState(DEMO_ACCOUNTS[0]!.password);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // Sign Up fields
   const [signupName, setSignupName] = useState("");
@@ -57,11 +54,6 @@ function AuthPage() {
       setMode(search.mode);
     }
   }, [search.mode]);
-
-  useEffect(() => {
-    // Makes sure the two documented demo logins exist in this environment.
-    seedDemo().catch(() => undefined);
-  }, [seedDemo]);
 
   const signIn = useMutation({
     mutationFn: async () => {
@@ -209,26 +201,6 @@ function AuthPage() {
                 >
                   {t("auth.noAccount")}
                 </button>
-              </div>
-
-              <div className="mt-6 border-t border-border pt-4">
-                <p className="text-sm font-semibold">{t("auth.demoAccounts")}</p>
-                <div className="mt-2 space-y-2">
-                  {DEMO_ACCOUNTS.map((a) => (
-                    <button
-                      key={a.email}
-                      type="button"
-                      onClick={() => {
-                        setEmail(a.email);
-                        setPassword(a.password);
-                      }}
-                      className="w-full rounded-xl border border-border px-4 py-3 text-left text-sm hover:bg-accent"
-                    >
-                      <span className="font-semibold">{a.name}</span>
-                      <span className="block text-muted-foreground">{a.email}</span>
-                    </button>
-                  ))}
-                </div>
               </div>
             </div>
           ) : (

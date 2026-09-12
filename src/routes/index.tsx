@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ClipboardList, QrCode, HeartHandshake, ShieldCheck } from "lucide-react";
-import { AppShell, Card, SectionHeading } from "@/components/AppShell";
+import { ClipboardList, QrCode, HeartHandshake } from "lucide-react";
+import { AppShell, Card } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
-import { DEMO_ACCOUNTS } from "@/lib/demo.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,35 +78,6 @@ function Index() {
             </Link>
           </Card>
         ))}
-      </div>
-
-      <div className="mt-8">
-        <SectionHeading
-          title={t("home.demo.title")}
-          subtitle={t("home.demo.subtitle")}
-        />
-        <div className="grid gap-4 sm:grid-cols-2">
-          {DEMO_ACCOUNTS.map((a) => (
-            <Card key={a.email}>
-              <p className="text-sm font-semibold text-foreground">{a.name}</p>
-              <p className="text-sm text-muted-foreground">{a.facility}</p>
-              <dl className="mt-3 space-y-1 text-sm">
-                <div className="flex gap-2">
-                  <dt className="text-muted-foreground">{t("common.email")}</dt>
-                  <dd className="font-mono">{a.email}</dd>
-                </div>
-                <div className="flex gap-2">
-                  <dt className="text-muted-foreground">{t("common.password")}</dt>
-                  <dd className="font-mono">{a.password}</dd>
-                </div>
-              </dl>
-            </Card>
-          ))}
-        </div>
-        <p className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
-          <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
-          {t("home.demo.notice")}
-        </p>
       </div>
     </AppShell>
   );
