@@ -7,12 +7,25 @@ import type { Database } from './types'
 
 
 
+import { handleMockSupabaseRequest } from './mock-fetch';
+
 function isNewSupabaseApiKey(value: string): boolean {
   return value.startsWith('sb_publishable_') || value.startsWith('sb_secret_');
 }
 
+function isPlaceholderUrl(url: string): boolean {
+  return !url || url.includes('your-project-id') || url.includes('placeholder');
+}
+
 function createSupabaseFetch(supabaseKey: string): typeof fetch {
-  return (input, init) => {
+  return async (input, init) => {
+    const url = typeof input === 'string' ? input : input instanceof Request ? input.url : input.toString();
+
+    if (isPlaceholderUrl(url)) {
+      const mockRes = await handleMockSupabaseRequest(url, init);
+      if (mockRes) return mockRes;
+    }
+
     const headers = new Headers(
       typeof Request !== 'undefined' && input instanceof Request ? input.headers : undefined,
     );
@@ -27,7 +40,14 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
     }
 
     headers.set('apikey', supabaseKey);
-    return fetch(input, { ...init, headers });
+
+    try {
+      return await fetch(input, { ...init, headers });
+    } catch (err) {
+      const mockRes = await handleMockSupabaseRequest(url, init);
+      if (mockRes) return mockRes;
+      throw err;
+    }
   };
 }
 

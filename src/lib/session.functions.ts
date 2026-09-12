@@ -21,10 +21,16 @@ export const me = createServerFn({ method: "GET" })
       .select("role")
       .eq("user_id", context.userId);
 
+    const claimsMeta = (context.claims as any)?.user_metadata || {};
+    const effectiveRoles = (roles ?? []).map((r) => r.role as string);
+    if (effectiveRoles.length === 0 && claimsMeta.role) {
+      effectiveRoles.push(claimsMeta.role);
+    }
+
     return {
       id: context.userId,
-      name: profile?.full_name ?? "Health worker",
-      facility: profile?.facility ?? "Field team",
-      roles: (roles ?? []).map((r) => r.role as string),
+      name: profile?.full_name || claimsMeta.full_name || "Health worker",
+      facility: profile?.facility || claimsMeta.facility || "Field team",
+      roles: effectiveRoles.length > 0 ? effectiveRoles : ["health_worker"],
     };
   });
