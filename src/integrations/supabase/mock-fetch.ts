@@ -52,7 +52,7 @@ export function createMockJwt(user: { id: string; email: string; user_metadata?:
 export function decodeMockJwt(token: string): any {
   try {
     const parts = token.split(".");
-    if (parts.length !== 3) return null;
+    if (parts.length !== 3 || !parts[1]) return null;
     let b64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
     while (b64.length % 4) b64 += "=";
     return JSON.parse(fromBase64(b64));
@@ -155,7 +155,7 @@ export async function handleMockSupabaseRequest(
     }
 
     // Also register profile & role
-    const existingProfile = db.profiles.find((p) => p.id === user!.id);
+    const existingProfile = db.profiles.find((p) => p["id"] === user.id);
     if (!existingProfile) {
       db.profiles.push({
         id: user.id,
@@ -165,7 +165,7 @@ export async function handleMockSupabaseRequest(
       });
     }
 
-    const existingRole = db.user_roles.find((r) => r.user_id === user!.id);
+    const existingRole = db.user_roles.find((r) => r["user_id"] === user.id);
     if (!existingRole) {
       db.user_roles.push({
         id: generateId(),
@@ -330,7 +330,7 @@ export async function handleMockSupabaseRequest(
         const row = { ...rec };
         if (!row.id) row.id = generateId();
         // Check upsert
-        const existingIdx = items.findIndex((i) => i.id === row.id);
+        const existingIdx = items.findIndex((i) => i["id"] === row.id);
         if (existingIdx >= 0) {
           items[existingIdx] = { ...items[existingIdx], ...row };
           inserted.push(items[existingIdx]);

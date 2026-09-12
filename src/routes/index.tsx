@@ -73,7 +73,7 @@ function Index() {
     {
       icon: ShieldCheck,
       title: "Privacy & Verification",
-      desc: "Server-enforced ABHA checks & anonymized blood donor outreach",
+      desc: "Structured for ABHA linkage — simulated for this build; anonymized donor outreach",
     },
   ];
 
