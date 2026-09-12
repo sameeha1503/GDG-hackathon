@@ -101,7 +101,7 @@ const en: Dict = {
   // Lookup Page
   "lookup.title": "Scan a care record",
   "lookup.subtitle":
-    "Point the camera at a patient's Rakt-Link QR code, or type the reference printed under it.",
+    "Type the reference printed on the patient's care record or card.",
   "lookup.cameraScan": "Camera scan",
   "lookup.startCamera": "Start camera",
   "lookup.manualEntry": "Type the reference",
@@ -251,7 +251,7 @@ const hi: Dict = {
   // Lookup Page
   "lookup.title": "रिकॉर्ड स्कैन करें",
   "lookup.subtitle":
-    "मरीज़ के रक्त-लिंक QR कोड पर कैमरा रखें, या नीचे छपा संदर्भ कोड टाइप करें।",
+    "मरीज़ के देखभाल रिकॉर्ड पर छपा संदर्भ कोड टाइप करें।",
   "lookup.cameraScan": "कैमरा स्कैन",
   "lookup.startCamera": "कैमरा शुरू करें",
   "lookup.manualEntry": "संदर्भ कोड टाइप करें",
@@ -401,7 +401,7 @@ const or: Dict = {
   // Lookup Page
   "lookup.title": "ରେକର୍ଡ ସ୍କାନ କରନ୍ତୁ",
   "lookup.subtitle":
-    "ରୋଗୀଙ୍କ ରକ୍ତ-ଲିଙ୍କ QR କୋଡ୍ ଆଡକୁ କ୍ୟାମେରା ଲକ୍ଷ୍ୟ କରନ୍ତୁ, କିମ୍ବା ତଳେ ଥିବା ରେଫରେନ୍ସ କୋଡ୍ ଟାଇପ୍ କରନ୍ତୁ।",
+    "ରୋଗୀଙ୍କ ଯତ୍ନ ରେକର୍ଡରେ ଛପା ରେଫରେନ୍ସ କୋଡ୍ ଟାଇପ୍ କରନ୍ତୁ।",
   "lookup.cameraScan": "କ୍ୟାମେରା ସ୍କାନ",
   "lookup.startCamera": "କ୍ୟାମେରା ଆରମ୍ଭ କରନ୍ତୁ",
   "lookup.manualEntry": "ରେଫରେନ୍ସ କୋଡ୍ ଟାଇପ୍ କରନ୍ତୁ",
@@ -551,7 +551,7 @@ const mr: Dict = {
   // Lookup Page
   "lookup.title": "नोंद स्कॅन करा",
   "lookup.subtitle":
-    "रुग्णाच्या रक्त-लिंक QR कोडवर कॅमेरा दाखवा, किंवा खाली छापलेला संदर्भ कोड टाइप करा.",
+    "रुग्णाच्या काळजी नोंदीवर छापलेला संदर्भ कोड टाइप करा.",
   "lookup.cameraScan": "कॅमेरा स्कॅन",
   "lookup.startCamera": "कॅमेरा सुरू करा",
   "lookup.manualEntry": "संदर्भ कोड टाइप करा",
@@ -701,7 +701,7 @@ const gu: Dict = {
   // Lookup Page
   "lookup.title": "રેકોર્ડ સ્કેન કરો",
   "lookup.subtitle":
-    "દર્દીના રક્ત-લિંક QR કોડ તરફ કૅમેરો રાખો, અથવા નીચે છાપેલ સંદર્ભ કોડ લખો.",
+    "દર્દીના સંભાળ રેકોર્ડ પર છપાયેલ સંદર્ભ કોડ લખો.",
   "lookup.cameraScan": "કૅમેરા સ્કેન",
   "lookup.startCamera": "કૅમેરો શરૂ કરો",
   "lookup.manualEntry": "સંદર્ભ કોડ લખો",
