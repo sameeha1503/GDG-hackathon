@@ -14,11 +14,11 @@ type Dict = Record<string, string>;
 const en: Dict = {
   // App Shell & Branding
   "app.name": "Rakt-Link",
-  "app.subtitle": "NSCAEM prototype",
+  "app.subtitle": "NSCAEM",
   "app.mission": "National Sickle Cell Anaemia Elimination Mission",
   "app.tag": "Continuity of care for the National Sickle Cell Anaemia Elimination Mission",
   "app.footer":
-    "Prototype for the National Sickle Cell Anaemia Elimination Mission. Reminders, ABHA IDs and donor outreach are simulated for demonstration; no messages are actually sent.",
+    "National Sickle Cell Anaemia Elimination Mission (NSCAEM). Reminders, ABHA IDs and donor outreach are simulated for demonstration; no messages are actually sent.",
   "role.health_worker": "ASHA / PHC worker",
   "role.blood_bank": "Blood bank staff",
 
@@ -73,7 +73,7 @@ const en: Dict = {
     "For patients living with sickle cell disease: transparent donor ranking, staged outreach and donor privacy by design.",
   "home.demo.title": "Demo logins",
   "home.demo.subtitle":
-    "This prototype is pre-loaded with realistic demonstration data across all three modules.",
+    "This system includes realistic demonstration scenarios across all three modules.",
   "home.demo.notice":
     "Eligibility rules and donor privacy are enforced on the server, not just hidden in the screens. Reminders, ABHA numbers and donor outreach are simulated.",
 
@@ -164,11 +164,11 @@ const en: Dict = {
 const hi: Dict = {
   // App Shell & Branding
   "app.name": "रक्त-लिंक",
-  "app.subtitle": "NSCAEM प्रोटोटाइप",
+  "app.subtitle": "NSCAEM",
   "app.mission": "राष्ट्रीय सिकल सेल एनीमिया उन्मूलन मिशन",
   "app.tag": "राष्ट्रीय सिकल सेल एनीमिया उन्मूलन मिशन के लिए देखभाल की निरंतरता",
   "app.footer":
-    "राष्ट्रीय सिकल सेल एनीमिया उन्मूलन मिशन के लिए प्रोटोटाइप। रिमाइंडर, आभा (ABHA) आईडी और रक्तदाता संपर्क केवल प्रदर्शन के लिए सिमुलेटेड हैं; कोई वास्तविक संदेश नहीं भेजा जाता है।",
+    "राष्ट्रीय सिकल सेल एनीमिया उन्मूलन मिशन (NSCAEM)। रिमाइंडर, आभा (ABHA) आईडी और रक्तदाता संपर्क केवल प्रदर्शन के लिए सिमुलेटेड हैं; कोई वास्तविक संदेश नहीं भेजा जाता है।",
   "role.health_worker": "आशा / PHC कार्यकर्ता",
   "role.blood_bank": "ब्लड बैंक कर्मचारी",
 
@@ -223,7 +223,7 @@ const hi: Dict = {
     "सिकल सेल रोग से पीड़ित मरीज़ों के लिए: पारदर्शी रक्तदाता रैंकिंग, चरणबद्ध संपर्क और गोपनीयता सुरक्षा।",
   "home.demo.title": "डेमो लॉगिन",
   "home.demo.subtitle":
-    "यह प्रोटोटाइप तीनों मॉड्यूल में वास्तविक प्रदर्शन डेटा के साथ पहले से लोड है।",
+    "यह प्रणाली तीनों मॉड्यूल में वास्तविक प्रदर्शन परिदृश्यों के साथ उपलब्ध है।",
   "home.demo.notice":
     "पात्रता नियम और रक्तदाता गोपनीयता सर्वर पर लागू होती है। रिमाइंडर, आभा (ABHA) आईडी और रक्तदाता संपर्क केवल प्रदर्शन के लिए सिमुलेटेड हैं।",
 
@@ -314,11 +314,11 @@ const hi: Dict = {
 const or: Dict = {
   // App Shell & Branding
   "app.name": "ରକ୍ତ-ଲିଙ୍କ",
-  "app.subtitle": "NSCAEM ପ୍ରୋଟୋଟାଇପ୍",
+  "app.subtitle": "NSCAEM",
   "app.mission": "ଜାତୀୟ ସିକଲ ସେଲ ଆନିମିଆ ନିର୍ମୂଳ ମିଶନ",
   "app.tag": "ଜାତୀୟ ସିକଲ ସେଲ ଆନିମିଆ ନିର୍ମୂଳ ମିଶନ ପାଇଁ ଯତ୍ନର ନିରନ୍ତରତା",
   "app.footer":
-    "ଜାତୀୟ ସିକଲ ସେଲ ଆନିମିଆ ନିର୍ମୂଳ ମିଶନ ପାଇଁ ପ୍ରୋଟୋଟାଇପ୍। ସ୍ମାରକ, ଆଭା (ABHA) ID ଏବଂ ରକ୍ତଦାତା ସମ୍ପର୍କ କେବଳ ପ୍ରଦର୍ଶନ ପାଇଁ; ପ୍ରକୃତ ବାର୍ତ୍ତା ପଠାଯାଇ ନାହିଁ।",
+    "ଜାତୀୟ ସିକଲ ସେଲ ଆନିମିଆ ନିର୍ମୂଳ ମିଶନ (NSCAEM)। ସ୍ମାରକ, ଆଭା (ABHA) ID ଏବଂ ରକ୍ତଦାତା ସମ୍ପର୍କ କେବଳ ପ୍ରଦର୍ଶନ ପାଇଁ; ପ୍ରକୃତ ବାର୍ତ୍ତା ପଠାଯାଇ ନାହିଁ।",
   "role.health_worker": "ଆଶା / PHC କର୍ମୀ",
   "role.blood_bank": "ରକ୍ତ ଭଣ୍ଡାର କର୍ମଚାରୀ",
 
@@ -373,7 +373,7 @@ const or: Dict = {
     "ସିକଲ ସେଲ ରୋଗୀଙ୍କ ପାଇଁ: ସ୍ୱଚ୍ଛ ରକ୍ତଦାତା ମାନ୍ୟତା, ପର୍ଯ୍ୟାୟକ୍ରମେ ଯୋଗାଯୋଗ ଏବଂ ଗୋପନୀୟତା ସୁରକ୍ଷା।",
   "home.demo.title": "ଡେମୋ ଲଗଇନ",
   "home.demo.subtitle":
-    "ଏହି ପ୍ରୋଟୋଟାଇପ୍ ତିନୋଟି ଯାକ ମଡ୍ୟୁଲରେ ବାସ୍ତବିକ ତଥ୍ୟ ସହିତ ପ୍ରି-ଲୋଡ୍ ଅଛି।",
+    "ଏହି ପ୍ରଣାଳୀ ସମସ୍ତ ତିନୋଟି ମଡ୍ୟୁଲରେ ବାସ୍ତବିକ ପ୍ରଦର୍ଶନ ଦୃଶ୍ୟ ସହିତ ଉପଲବ୍ଧ।",
   "home.demo.notice":
     "ଯୋଗ୍ୟତା ନିୟମ ଏବଂ ରକ୍ତଦାତା ଗୋପନୀୟତା ସର୍ଭରରେ ଲାଗୁ ହୋଇଛି। ସ୍ମାରକ, ଆଭା (ABHA) ID ଏବଂ ରକ୍ତଦାତା ସମ୍ପର୍କ ପ୍ରଦର୍ଶନ ପାଇଁ ସିମୁଲେଟ୍ କରାଯାଇଛି।",
 
@@ -464,11 +464,11 @@ const or: Dict = {
 const mr: Dict = {
   // App Shell & Branding
   "app.name": "रक्त-लिंक",
-  "app.subtitle": "NSCAEM प्रोटोटाइप",
+  "app.subtitle": "NSCAEM",
   "app.mission": "राष्ट्रीय सिकल सेल अ‍ॅनिमिया निर्मूलन अभियान",
   "app.tag": "राष्ट्रीय सिकल सेल अ‍ॅनिमिया निर्मूलन अभियानासाठी काळजीची सातत्यता",
   "app.footer":
-    "राष्ट्रीय सिकल सेल अ‍ॅनिमिया निर्मूलन अभियानासाठी प्रोटोटाइप. स्मरणपत्रे, आभा (ABHA) आयडी आणि रक्तदाता संपर्क केवळ प्रात्यक्षिकासाठी आहेत; कोणतेही प्रत्यक्ष संदेश पाठवले जात नाहीत.",
+    "राष्ट्रीय सिकल सेल अ‍ॅनिमिया निर्मूलन अभियान (NSCAEM). स्मरणपत्रे, आभा (ABHA) आयडी आणि रक्तदाता संपर्क केवळ प्रात्यक्षिकासाठी आहेत; कोणतेही प्रत्यक्ष संदेश पाठवले जात नाहीत.",
   "role.health_worker": "आशा / PHC कार्यकर्ता",
   "role.blood_bank": "रक्तपेढी कर्मचारी",
 
@@ -523,7 +523,7 @@ const mr: Dict = {
     "सिकल सेल रुग्णांसाठी: पारदर्शक रक्तदाता क्रमवारी, टप्प्याटप्प्याने संपर्क आणि गोपनीयतेचे संरक्षण.",
   "home.demo.title": "डेमो लॉगिन",
   "home.demo.subtitle":
-    "हा प्रोटोटाइप तिन्ही मॉड्यूल्समध्ये वास्तववादी डेमो डेटासह लोड केलेला आहे.",
+    "ही प्रणाली तिन्ही मॉड्यूल्समध्ये वास्तववादी प्रात्यक्षिक परिस्थितींसह उपलब्ध आहे.",
   "home.demo.notice":
     "पात्रता नियम आणि रक्तदाता गोपनीयता सर्व्हरवर लागू केली आहे. स्मरणपत्रे, आभा (ABHA) आयडी आणि रक्तदाता संपर्क केवळ प्रात्यक्षिकासाठी आहेत.",
 
@@ -614,11 +614,11 @@ const mr: Dict = {
 const gu: Dict = {
   // App Shell & Branding
   "app.name": "રક્ત-લિંક",
-  "app.subtitle": "NSCAEM પ્રોટોટાઇપ",
+  "app.subtitle": "NSCAEM",
   "app.mission": "રાષ્ટ્રીય સિકલ સેલ એનિમિયા નાબૂદી મિશન",
   "app.tag": "રાષ્ટ્રીય સિકલ સેલ એનિમિયા નાબૂદી મિશન માટે સંભાળની સાતત્યતા",
   "app.footer":
-    "રાષ્ટ્રીય સિકલ સેલ એનિમિયા નાબૂદી મિશન માટેનો પ્રોટોટાઇપ. રિમાઇન્ડર્સ, આભા (ABHA) ID અને રક્તદાતા સંપર્ક પ્રદર્શન માટે સિમ્યુલેટેડ છે; કોઈ સંદેશ ખરેખર મોકલવામાં આવતો નથી.",
+    "રાષ્ટ્રીય સિકલ સેલ એનિમિયા નાબૂદી મિશન (NSCAEM). રિમાઇન્ડર્સ, આભા (ABHA) ID અને રક્તદાતા સંપર્ક પ્રદર્શન માટે સિમ્યુલેટેડ છે; કોઈ સંદેશ ખરેખર મોકલવામાં આવતો નથી.",
   "role.health_worker": "આશા / PHC કાર્યકર",
   "role.blood_bank": "બ્લડ બેંક સ્ટાફ",
 
@@ -673,7 +673,7 @@ const gu: Dict = {
     "સિકલ સેલ દર્દીઓ માટે: પારદર્શક રક્તદાતા રેન્કિંગ, તબક્કાવાર સંપર્ક અને ગોપનીયતા સુરક્ષા.",
   "home.demo.title": "ડેમો લૉગિન",
   "home.demo.subtitle":
-    "આ પ્રોટોટાઇપ ત્રણેય મોડ્યુલમાં વાસ્તવિક ડેમો ડેટા સાથે પ્રી-લોડેડ છે.",
+    "આ સિસ્ટમ ત્રણેય મોડ્યુલમાં વાસ્તવિક પ્રદર્શન દૃશ્યો સાથે ઉપલબ્ધ છે.",
   "home.demo.notice":
     "પાત્રતા નિયમો અને રક્તદાતા ગોપનીયતા સર્વર પર લાગુ થાય છે. રિમાઇન્ડર્સ, આભા (ABHA) ID અને રક્તદાતા સંપર્ક પ્રદર્શન માટે સિમ્યુલેટેડ છે.",
 

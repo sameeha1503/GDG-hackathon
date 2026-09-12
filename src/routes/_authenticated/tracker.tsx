@@ -449,7 +449,7 @@ function ReminderPanel({ patient, onDone }: { patient: PatientRow; onDone: () =>
       <h3 className="font-bold">Reminder for {patient.name}</h3>
       <p className="text-sm text-muted-foreground">
         Simulated dispatch: the message is recorded in the activity log. No SMS or call is actually
-        sent from this prototype.
+        sent in this demonstration environment.
       </p>
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label className="text-sm">

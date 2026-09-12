@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "A prototype for India's sickle cell mission: track confirmatory tests, carry a QR care record, and find matched blood donors.",
+          "Digital healthcare platform for India's sickle cell mission: track confirmatory tests, carry a QR care record, and find matched blood donors.",
       },
       { property: "og:title", content: "Rakt-Link — sickle cell continuity of care" },
       {

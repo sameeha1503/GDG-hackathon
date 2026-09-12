@@ -7,6 +7,7 @@ import { useI18n } from "@/lib/i18n";
 import { useOffline } from "@/lib/offline";
 import { LANGUAGES } from "@/lib/domain";
 import { cn } from "@/lib/utils";
+import { Logo } from "./Logo";
 
 export function LanguageSelector() {
   const { lang, setLang, t } = useI18n();
@@ -98,12 +99,9 @@ export function AppShell({
       <header className="border-b border-border bg-card/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
           <Link to="/" className="flex items-center gap-3">
-            <span className="grid size-10 place-items-center rounded-xl bg-primary text-lg font-bold text-primary-foreground">
-              र
-            </span>
-            <span className="leading-tight">
-              <span className="block text-lg font-bold">{t("app.name")}</span>
-              <span className="block text-xs text-muted-foreground">{t("app.subtitle")}</span>
+            <Logo />
+            <span className="text-xl font-bold tracking-tight text-foreground">
+              {t("app.name")}
             </span>
           </Link>
 
