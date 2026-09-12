@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { AlertTriangle, MessageSquare, Plus, PhoneCall, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, MessageSquare, Plus, PhoneCall, CheckCircle2, Search, X } from "lucide-react";
 import { Card, OfflineBanner, SectionHeading } from "@/components/AppShell";
 import {
   closePatient,
@@ -80,6 +80,7 @@ function TrackerPage() {
   const [bandFilter, setBandFilter] = useState("all");
   const [districtFilter, setDistrictFilter] = useState("all");
   const [sortBy, setSortBy] = useState<"waiting" | "name">("waiting");
+  const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [showIntake, setShowIntake] = useState(false);
   const [reminderFor, setReminderFor] = useState<PatientRow | null>(null);
@@ -142,15 +143,52 @@ function TrackerPage() {
 
       <Card className="mb-5">
         <div className="flex flex-wrap items-end gap-3">
-          <label className="text-sm">
+          <div className="text-sm">
             <span className="block font-semibold">{t("common.search")}</span>
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder={t("m1.searchPlaceholder")}
-              className="mt-1 rounded-xl border border-input bg-background px-3 py-2 text-base"
-            />
-          </label>
+            <div className="mt-1 flex items-center gap-1.5">
+              <div className="relative flex items-center">
+                <Search className="pointer-events-none absolute left-3 size-4 text-muted-foreground" />
+                <input
+                  value={searchInput}
+                  onChange={(e) => {
+                    setSearchInput(e.target.value);
+                    if (e.target.value === "") setSearch("");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      setSearch(searchInput.trim());
+                    }
+                  }}
+                  placeholder={t("m1.searchPlaceholder")}
+                  className="w-44 sm:w-52 rounded-xl border border-input bg-background pl-9 pr-8 py-2 text-base focus:border-primary focus:outline-none"
+                />
+                {searchInput && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchInput("");
+                      setSearch("");
+                    }}
+                    className="absolute right-2.5 text-muted-foreground hover:text-foreground cursor-pointer"
+                    title={t("common.close")}
+                    aria-label="Clear search"
+                  >
+                    <X className="size-4" />
+                  </button>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => setSearch(searchInput.trim())}
+                className="flex items-center gap-1.5 rounded-xl bg-primary px-3.5 py-2 font-semibold text-primary-foreground shadow-xs transition-all hover:bg-primary/90 active:scale-95 cursor-pointer"
+                aria-label="Search patients"
+              >
+                <Search className="size-4" />
+                <span>{t("common.search")}</span>
+              </button>
+            </div>
+          </div>
           <label className="text-sm">
             <span className="block font-semibold">{t("m1.filter.status")}</span>
             <select

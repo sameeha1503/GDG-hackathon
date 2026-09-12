@@ -303,7 +303,10 @@ export async function handleMockSupabaseRequest(
     if (!db[table]) {
       (db as any)[table] = [];
     }
-    const items: Array<Record<string, any>> = db[table] as any;
+    const items: Array<Record<string, any>> = (db as any)[table];
+    const headers = new Headers(init?.headers);
+    const accept = (headers.get("accept") || headers.get("Accept") || "").toLowerCase();
+    const isSingle = accept.includes("vnd.pgrst.object+json");
 
     if (method === "GET") {
       let filtered = [...items];
@@ -316,7 +319,8 @@ export async function handleMockSupabaseRequest(
         }
       });
 
-      return new Response(JSON.stringify(filtered), {
+      const responseBody = isSingle ? (filtered[0] ?? null) : filtered;
+      return new Response(JSON.stringify(responseBody), {
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
@@ -341,7 +345,8 @@ export async function handleMockSupabaseRequest(
       }
       saveDb();
 
-      return new Response(JSON.stringify(inserted.length === 1 ? inserted[0] : inserted), {
+      const responseBody = isSingle ? (inserted[0] ?? null) : inserted;
+      return new Response(JSON.stringify(responseBody), {
         status: 201,
         headers: { "Content-Type": "application/json" },
       });
@@ -362,7 +367,8 @@ export async function handleMockSupabaseRequest(
       });
       saveDb();
 
-      return new Response(JSON.stringify(updated.length === 1 ? updated[0] : updated), {
+      const responseBody = isSingle ? (updated[0] ?? null) : updated;
+      return new Response(JSON.stringify(responseBody), {
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
