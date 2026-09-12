@@ -28,6 +28,7 @@ const en: Dict = {
   "nav.donors": "Blood donors",
   "nav.lookup": "Scan a record",
   "nav.signin": "Sign in",
+  "nav.signup": "Sign up",
   "nav.signout": "Sign out",
 
   // Common
@@ -83,6 +84,19 @@ const en: Dict = {
   "auth.signinBtn": "Sign in",
   "auth.signingIn": "Signing in…",
   "auth.demoAccounts": "Demo logins",
+  "auth.tabSignin": "Sign in",
+  "auth.tabSignup": "Sign up",
+  "auth.signupTitle": "Create an account",
+  "auth.signupSubtitle": "Register as an ASHA worker, PHC staff, or blood bank team member.",
+  "auth.signupBtn": "Create account",
+  "auth.signingUp": "Creating account…",
+  "auth.fullName": "Full name",
+  "auth.facility": "Health facility / Hospital",
+  "auth.role": "Role",
+  "auth.roleHealthWorker": "ASHA / PHC Health Worker",
+  "auth.roleBloodBank": "Blood Bank Staff",
+  "auth.haveAccount": "Already have an account? Sign in",
+  "auth.noAccount": "Don't have an account? Sign up",
 
   // Lookup Page
   "lookup.title": "Scan a care record",
@@ -164,6 +178,7 @@ const hi: Dict = {
   "nav.donors": "रक्तदाता",
   "nav.lookup": "रिकॉर्ड स्कैन करें",
   "nav.signin": "साइन इन",
+  "nav.signup": "साइन अप",
   "nav.signout": "साइन आउट",
 
   // Common
@@ -219,6 +234,19 @@ const hi: Dict = {
   "auth.signinBtn": "साइन इन करें",
   "auth.signingIn": "साइन इन हो रहा है…",
   "auth.demoAccounts": "डेमो खाते",
+  "auth.tabSignin": "साइन इन",
+  "auth.tabSignup": "साइन अप",
+  "auth.signupTitle": "नया खाता बनाएं",
+  "auth.signupSubtitle": "आशा कार्यकर्ता, PHC कर्मचारी या ब्लड बैंक सदस्य के रूप में पंजीकरण करें।",
+  "auth.signupBtn": "खाता बनाएं",
+  "auth.signingUp": "खाता बनाया जा रहा है…",
+  "auth.fullName": "पूरा नाम",
+  "auth.facility": "स्वास्थ्य केंद्र / अस्पताल",
+  "auth.role": "भूमिका / पद",
+  "auth.roleHealthWorker": "आशा / PHC स्वास्थ्य कार्यकर्ता",
+  "auth.roleBloodBank": "ब्लड बैंक कर्मचारी",
+  "auth.haveAccount": "पहले से खाता है? साइन इन करें",
+  "auth.noAccount": "खाता नहीं है? साइन अप करें",
 
   // Lookup Page
   "lookup.title": "रिकॉर्ड स्कैन करें",
@@ -300,6 +328,7 @@ const or: Dict = {
   "nav.donors": "ରକ୍ତଦାତା",
   "nav.lookup": "ରେକର୍ଡ ସ୍କାନ କରନ୍ତୁ",
   "nav.signin": "ସାଇନ ଇନ",
+  "nav.signup": "ସାଇନ ଅପ",
   "nav.signout": "ସାଇନ ଆଉଟ",
 
   // Common
@@ -355,6 +384,19 @@ const or: Dict = {
   "auth.signinBtn": "ସାଇନ ଇନ କରନ୍ତୁ",
   "auth.signingIn": "ସାଇନ ଇନ ହେଉଛି…",
   "auth.demoAccounts": "ଡେମୋ ଆକାଉଣ୍ଟ",
+  "auth.tabSignin": "ସାଇନ ଇନ",
+  "auth.tabSignup": "ସାଇନ ଅପ",
+  "auth.signupTitle": "ନୂତନ ଖାତା ଖୋଲନ୍ତୁ",
+  "auth.signupSubtitle": "ଆଶା କର୍ମୀ, PHC କର୍ମଚାରୀ କିମ୍ବା ରକ୍ତ ଭଣ୍ଡାର ସଦସ୍ୟ ଭାବରେ ପଞ୍ଜୀକରଣ କରନ୍ତୁ।",
+  "auth.signupBtn": "ଖାତା ତିଆରି କରନ୍ତୁ",
+  "auth.signingUp": "ଖାତା ତିଆରି ହେଉଛି…",
+  "auth.fullName": "ସମ୍ପୂର୍ଣ୍ଣ ନାମ",
+  "auth.facility": "ସ୍ୱାସ୍ଥ୍ୟ କେନ୍ଦ୍ର / ଡାକ୍ତରଖାନା",
+  "auth.role": "ଭୂମିକା",
+  "auth.roleHealthWorker": "ଆଶା / PHC ସ୍ୱାସ୍ଥ୍ୟ କର୍ମୀ",
+  "auth.roleBloodBank": "ରକ୍ତ ଭଣ୍ଡାର କର୍ମଚାରୀ",
+  "auth.haveAccount": "ପୂର୍ବରୁ ଖାତା ଅଛି? ସାଇନ ଇନ କରନ୍ତୁ",
+  "auth.noAccount": "ଖାତା ନାହିଁ? ସାଇନ ଅପ କରନ୍ତୁ",
 
   // Lookup Page
   "lookup.title": "ରେକର୍ଡ ସ୍କାନ କରନ୍ତୁ",
@@ -436,6 +478,7 @@ const mr: Dict = {
   "nav.donors": "रक्तदाते",
   "nav.lookup": "नोंद स्कॅन करा",
   "nav.signin": "साइन इन",
+  "nav.signup": "साइन अप",
   "nav.signout": "साइन आउट",
 
   // Common
@@ -491,6 +534,19 @@ const mr: Dict = {
   "auth.signinBtn": "साइन इन करा",
   "auth.signingIn": "साइन इन होत आहे…",
   "auth.demoAccounts": "डेमो खाती",
+  "auth.tabSignin": "साइन इन",
+  "auth.tabSignup": "साइन अप",
+  "auth.signupTitle": "नवीन खाते तयार करा",
+  "auth.signupSubtitle": "आशा कार्यकर्ता, PHC कर्मचारी किंवा रक्तपेढी सदस्य म्हणून नोंदणी करा.",
+  "auth.signupBtn": "खाते तयार करा",
+  "auth.signingUp": "खाते तयार होत आहे…",
+  "auth.fullName": "पूर्ण नाव",
+  "auth.facility": "आरोग्य केंद्र / रुग्णालय",
+  "auth.role": "भूमिका",
+  "auth.roleHealthWorker": "आशा / PHC आरोग्य कार्यकर्ता",
+  "auth.roleBloodBank": "रक्तपेढी कर्मचारी",
+  "auth.haveAccount": "आधीच खाते आहे? साइन इन करा",
+  "auth.noAccount": "खाते नाही? साइन अप करा",
 
   // Lookup Page
   "lookup.title": "नोंद स्कॅन करा",
@@ -572,6 +628,7 @@ const gu: Dict = {
   "nav.donors": "રક્તદાતા",
   "nav.lookup": "રેકોર્ડ સ્કેન કરો",
   "nav.signin": "સાઇન ઇન",
+  "nav.signup": "સાઇન અપ",
   "nav.signout": "સાઇન આઉટ",
 
   // Common
@@ -627,6 +684,19 @@ const gu: Dict = {
   "auth.signinBtn": "સાઇન ઇન કરો",
   "auth.signingIn": "સાઇન ઇન થઈ રહ્યું છે…",
   "auth.demoAccounts": "ડેમો એકાઉન્ટ્સ",
+  "auth.tabSignin": "સાઇન ઇન",
+  "auth.tabSignup": "સાઇન અપ",
+  "auth.signupTitle": "નવું એકાઉન્ટ બનાવો",
+  "auth.signupSubtitle": "આશા કાર્યકર, PHC સ્ટાફ અથવા બ્લડ બેંક સભ્ય તરીકે નોંધણી કરો.",
+  "auth.signupBtn": "એકાઉન્ટ બનાવો",
+  "auth.signingUp": "એકાઉન્ટ બની રહ્યું છે…",
+  "auth.fullName": "પૂરું નામ",
+  "auth.facility": "આરોગ્ય કેન્દ્ર / હોસ્પિટલ",
+  "auth.role": "ભૂમિકા",
+  "auth.roleHealthWorker": "આશા / PHC આરોગ્ય કાર્યકર",
+  "auth.roleBloodBank": "બ્લડ બેંક સ્ટાફ",
+  "auth.haveAccount": "પહેલેથી એકાઉન્ટ છે? સાઇન ઇન કરો",
+  "auth.noAccount": "એકાઉન્ટ નથી? સાઇન અપ કરો",
 
   // Lookup Page
   "lookup.title": "રેકોર્ડ સ્કેન કરો",

@@ -7,17 +7,27 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell, Card, SectionHeading } from "@/components/AppShell";
 import { DEMO_ACCOUNTS, ensureDemoAccounts } from "@/lib/demo.functions";
 import { useI18n } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+
+type AuthSearch = {
+  mode?: "signin" | "signup";
+};
 
 export const Route = createFileRoute("/auth")({
+  validateSearch: (search: Record<string, unknown>): AuthSearch => {
+    return {
+      mode: search["mode"] === "signup" ? "signup" : "signin",
+    };
+  },
   head: () => ({
     meta: [
-      { title: "Sign in — Rakt-Link" },
+      { title: "Sign in or Sign up — Rakt-Link" },
       {
         name: "description",
-        content: "Sign in as an NSCAEM health worker or blood bank desk to use Rakt-Link.",
+        content: "Sign in or create an account as an NSCAEM health worker or blood bank desk to use Rakt-Link.",
       },
-      { property: "og:title", content: "Sign in — Rakt-Link" },
-      { property: "og:description", content: "Health worker and blood bank sign-in for Rakt-Link." },
+      { property: "og:title", content: "Sign in or Sign up — Rakt-Link" },
+      { property: "og:description", content: "Health worker and blood bank sign-in and registration for Rakt-Link." },
     ],
   }),
   component: AuthPage,
@@ -26,9 +36,27 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const { t } = useI18n();
   const navigate = useNavigate();
+  const search = Route.useSearch();
   const seedDemo = useServerFn(ensureDemoAccounts);
+
+  const [mode, setMode] = useState<"signin" | "signup">(search.mode ?? "signin");
+
+  // Sign In fields
   const [email, setEmail] = useState(DEMO_ACCOUNTS[0]!.email);
   const [password, setPassword] = useState(DEMO_ACCOUNTS[0]!.password);
+
+  // Sign Up fields
+  const [signupName, setSignupName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [signupFacility, setSignupFacility] = useState("");
+  const [signupRole, setSignupRole] = useState<"health_worker" | "blood_bank">("health_worker");
+
+  useEffect(() => {
+    if (search.mode && (search.mode === "signin" || search.mode === "signup")) {
+      setMode(search.mode);
+    }
+  }, [search.mode]);
 
   useEffect(() => {
     // Makes sure the two documented demo logins exist in this environment.
@@ -47,77 +75,299 @@ function AuthPage() {
     onError: (error: Error) => toast.error(error.message),
   });
 
+  const signUp = useMutation({
+    mutationFn: async () => {
+      const { data, error } = await supabase.auth.signUp({
+        email: signupEmail,
+        password: signupPassword,
+        options: {
+          data: {
+            full_name: signupName,
+            facility: signupFacility,
+            role: signupRole,
+          },
+        },
+      });
+      if (error) throw new Error(error.message);
+
+      if (data.user) {
+        try {
+          await supabase.from("profiles").upsert({
+            id: data.user.id,
+            full_name: signupName,
+            facility: signupFacility,
+          });
+        } catch {
+          // Ignored if RLS requires confirmed session
+        }
+      }
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data.session) {
+        toast.success("Account created! Signed in successfully.");
+        navigate({ to: "/tracker" });
+      } else {
+        toast.success("Account created successfully! Please sign in.");
+        setEmail(signupEmail);
+        setPassword(signupPassword);
+        setMode("signin");
+      }
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
   return (
     <AppShell>
       <div className="mx-auto max-w-lg">
         <SectionHeading
-          title={t("auth.title")}
-          subtitle={t("auth.subtitle")}
+          title={mode === "signup" ? t("auth.signupTitle") : t("auth.title")}
+          subtitle={mode === "signup" ? t("auth.signupSubtitle") : t("auth.subtitle")}
         />
-        <Card>
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              signIn.mutate();
-            }}
-          >
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold">
-                {t("common.email")}
-              </label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-semibold">
-                {t("common.password")}
-              </label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={signIn.isPending}
-              className="w-full rounded-xl bg-primary px-6 py-3 text-base font-semibold text-primary-foreground disabled:opacity-60"
-            >
-              {signIn.isPending ? t("auth.signingIn") : t("auth.signinBtn")}
-            </button>
-          </form>
 
-          <div className="mt-6 border-t border-border pt-4">
-            <p className="text-sm font-semibold">{t("auth.demoAccounts")}</p>
-            <div className="mt-2 space-y-2">
-              {DEMO_ACCOUNTS.map((a) => (
-                <button
-                  key={a.email}
-                  type="button"
-                  onClick={() => {
-                    setEmail(a.email);
-                    setPassword(a.password);
-                  }}
-                  className="w-full rounded-xl border border-border px-4 py-3 text-left text-sm hover:bg-accent"
-                >
-                  <span className="font-semibold">{a.name}</span>
-                  <span className="block text-muted-foreground">{a.email}</span>
-                </button>
-              ))}
-            </div>
+        <Card>
+          {/* Sign In / Sign Up Tab Switcher */}
+          <div className="mb-6 flex rounded-xl border border-border bg-secondary/40 p-1">
+            <button
+              type="button"
+              onClick={() => setMode("signin")}
+              className={cn(
+                "flex-1 rounded-lg py-2.5 text-center text-sm font-semibold transition-all",
+                mode === "signin"
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {t("auth.tabSignin")}
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("signup")}
+              className={cn(
+                "flex-1 rounded-lg py-2.5 text-center text-sm font-semibold transition-all",
+                mode === "signup"
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {t("auth.tabSignup")}
+            </button>
           </div>
+
+          {mode === "signin" ? (
+            /* Sign In Form */
+            <div>
+              <form
+                className="space-y-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  signIn.mutate();
+                }}
+              >
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold">
+                    {t("common.email")}
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="block text-sm font-semibold">
+                    {t("common.password")}
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={signIn.isPending}
+                  className="w-full rounded-xl bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-opacity hover:bg-primary/90 disabled:opacity-60"
+                >
+                  {signIn.isPending ? t("auth.signingIn") : t("auth.signinBtn")}
+                </button>
+              </form>
+
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => setMode("signup")}
+                  className="text-sm font-semibold text-primary hover:underline"
+                >
+                  {t("auth.noAccount")}
+                </button>
+              </div>
+
+              <div className="mt-6 border-t border-border pt-4">
+                <p className="text-sm font-semibold">{t("auth.demoAccounts")}</p>
+                <div className="mt-2 space-y-2">
+                  {DEMO_ACCOUNTS.map((a) => (
+                    <button
+                      key={a.email}
+                      type="button"
+                      onClick={() => {
+                        setEmail(a.email);
+                        setPassword(a.password);
+                      }}
+                      className="w-full rounded-xl border border-border px-4 py-3 text-left text-sm hover:bg-accent"
+                    >
+                      <span className="font-semibold">{a.name}</span>
+                      <span className="block text-muted-foreground">{a.email}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Sign Up Form */
+            <div>
+              <form
+                className="space-y-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  signUp.mutate();
+                }}
+              >
+                <div>
+                  <label htmlFor="signup-name" className="block text-sm font-semibold">
+                    {t("auth.fullName")}
+                  </label>
+                  <input
+                    id="signup-name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="e.g. Sushila Netam"
+                    value={signupName}
+                    onChange={(e) => setSignupName(e.target.value)}
+                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="signup-email" className="block text-sm font-semibold">
+                    {t("common.email")}
+                  </label>
+                  <input
+                    id="signup-email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="e.g. worker@phc.in"
+                    value={signupEmail}
+                    onChange={(e) => setSignupEmail(e.target.value)}
+                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="signup-password" className="block text-sm font-semibold">
+                    {t("common.password")}
+                  </label>
+                  <input
+                    id="signup-password"
+                    type="password"
+                    autoComplete="new-password"
+                    placeholder="••••••••"
+                    minLength={6}
+                    value={signupPassword}
+                    onChange={(e) => setSignupPassword(e.target.value)}
+                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="signup-facility" className="block text-sm font-semibold">
+                    {t("auth.facility")}
+                  </label>
+                  <input
+                    id="signup-facility"
+                    type="text"
+                    placeholder="e.g. Kondagaon PHC, Bastar"
+                    value={signupFacility}
+                    onChange={(e) => setSignupFacility(e.target.value)}
+                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base focus:border-primary focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold">{t("auth.role")}</label>
+                  <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <label
+                      className={cn(
+                        "flex cursor-pointer items-center gap-3 rounded-xl border p-3 text-sm transition-colors",
+                        signupRole === "health_worker"
+                          ? "border-primary bg-primary/10 font-semibold text-foreground"
+                          : "border-border bg-card text-muted-foreground hover:bg-accent",
+                      )}
+                    >
+                      <input
+                        type="radio"
+                        name="signup-role"
+                        value="health_worker"
+                        checked={signupRole === "health_worker"}
+                        onChange={() => setSignupRole("health_worker")}
+                        className="accent-primary"
+                      />
+                      <span>{t("auth.roleHealthWorker")}</span>
+                    </label>
+
+                    <label
+                      className={cn(
+                        "flex cursor-pointer items-center gap-3 rounded-xl border p-3 text-sm transition-colors",
+                        signupRole === "blood_bank"
+                          ? "border-primary bg-primary/10 font-semibold text-foreground"
+                          : "border-border bg-card text-muted-foreground hover:bg-accent",
+                      )}
+                    >
+                      <input
+                        type="radio"
+                        name="signup-role"
+                        value="blood_bank"
+                        checked={signupRole === "blood_bank"}
+                        onChange={() => setSignupRole("blood_bank")}
+                        className="accent-primary"
+                      />
+                      <span>{t("auth.roleBloodBank")}</span>
+                    </label>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={signUp.isPending}
+                  className="w-full rounded-xl bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-opacity hover:bg-primary/90 disabled:opacity-60"
+                >
+                  {signUp.isPending ? t("auth.signingUp") : t("auth.signupBtn")}
+                </button>
+              </form>
+
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => setMode("signin")}
+                  className="text-sm font-semibold text-primary hover:underline"
+                >
+                  {t("auth.haveAccount")}
+                </button>
+              </div>
+            </div>
+          )}
         </Card>
       </div>
     </AppShell>

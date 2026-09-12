@@ -146,12 +146,22 @@ export function AppShell({
                 <LogOut className="size-4" /> {t("nav.signout")}
               </button>
             ) : (
-              <Link
-                to="/auth"
-                className="flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
-              >
-                {t("nav.signin")}
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link
+                  to="/auth"
+                  search={{ mode: "signin" }}
+                  className="flex items-center rounded-lg border border-border px-3.5 py-2 text-sm font-semibold text-foreground hover:bg-accent"
+                >
+                  {t("nav.signin")}
+                </Link>
+                <Link
+                  to="/auth"
+                  search={{ mode: "signup" }}
+                  className="flex items-center rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 shadow-sm"
+                >
+                  {t("nav.signup")}
+                </Link>
+              </div>
             )}
           </div>
         </div>
