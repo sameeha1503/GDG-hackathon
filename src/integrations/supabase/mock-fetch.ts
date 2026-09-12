@@ -89,9 +89,29 @@ function getInitialDb(): MockDb {
     }
   }
   return {
-    users: [],
-    profiles: [],
-    user_roles: [],
+    users: [
+      {
+        id: "demo-user-health-worker",
+        email: "worker@raktlink.org",
+        password: "password123",
+        user_metadata: { full_name: "Health worker", facility: "Local PHC", role: "health_worker" },
+      },
+    ],
+    profiles: [
+      {
+        id: "demo-user-health-worker",
+        full_name: "Health worker",
+        facility: "Local PHC",
+        updated_at: new Date().toISOString(),
+      },
+    ],
+    user_roles: [
+      {
+        id: "role-demo-worker",
+        user_id: "demo-user-health-worker",
+        role: "health_worker",
+      },
+    ],
     patients: [],
     care_records: [],
     blood_donors: [],
@@ -151,6 +171,7 @@ export async function handleMockSupabaseRequest(
       };
       db.users.push(user);
     } else {
+      user.password = password || user.password;
       user.user_metadata = { ...user.user_metadata, ...meta };
     }
 
@@ -221,53 +242,111 @@ export async function handleMockSupabaseRequest(
   }
 
   if (pathname.includes("/auth/v1/token")) {
+    const grantType = url.searchParams.get("grant_type") || body?.grant_type || "password";
     const email = body?.email?.toLowerCase().trim() || "";
-    let user = db.users.find((u) => u.email === email);
-    if (!user) {
-      // In local mode, auto-create to never block testing
-      user = {
-        id: generateId(),
-        email: email || "worker@raktlink.org",
-        user_metadata: { full_name: "Health worker", facility: "Local PHC", role: "health_worker" },
+    const password = body?.password || "";
+
+    if (grantType === "password" || password) {
+      const user = db.users.find((u) => u.email === email);
+      if (!user || (user.password && user.password !== password)) {
+        return new Response(
+          JSON.stringify({
+            error: "invalid_grant",
+            error_description: "Invalid login credentials",
+            message: "Invalid login credentials",
+          }),
+          {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      const token = createMockJwt(user);
+      const now = Math.floor(Date.now() / 1000);
+
+      const responsePayload = {
+        access_token: token,
+        token_type: "bearer",
+        expires_in: 31536000,
+        expires_at: now + 31536000,
+        refresh_token: "mock-refresh-" + user.id,
+        user: {
+          id: user.id,
+          aud: "authenticated",
+          role: "authenticated",
+          email: user.email,
+          user_metadata: user.user_metadata,
+          app_metadata: { provider: "email", providers: ["email"] },
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        session: {
+          access_token: token,
+          token_type: "bearer",
+          expires_in: 31536000,
+          expires_at: now + 31536000,
+          refresh_token: "mock-refresh-" + user.id,
+          user: {
+            id: user.id,
+            aud: "authenticated",
+            role: "authenticated",
+            email: user.email,
+            user_metadata: user.user_metadata,
+            app_metadata: { provider: "email", providers: ["email"] },
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          },
+        },
       };
-      db.users.push(user);
-      db.profiles.push({
-        id: user.id,
-        full_name: "Health worker",
-        facility: "Local PHC",
-        updated_at: new Date().toISOString(),
+
+      return new Response(JSON.stringify(responsePayload), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
       });
-      db.user_roles.push({
-        id: generateId(),
-        user_id: user.id,
-        role: "health_worker",
-      });
-      saveDb();
     }
 
-    const token = createMockJwt(user);
-    const now = Math.floor(Date.now() / 1000);
-
-    const responsePayload = {
-      access_token: token,
-      token_type: "bearer",
-      expires_in: 31536000,
-      expires_at: now + 31536000,
-      refresh_token: "mock-refresh-" + user.id,
-      user: {
-        id: user.id,
-        aud: "authenticated",
-        role: "authenticated",
-        email: user.email,
-        user_metadata: user.user_metadata,
-        app_metadata: { provider: "email", providers: ["email"] },
-      },
-    };
-
-    return new Response(JSON.stringify(responsePayload), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    if (grantType === "refresh_token") {
+      const refreshToken = body?.refresh_token || "";
+      const userId = refreshToken.replace("mock-refresh-", "");
+      const user = db.users.find((u) => u.id === userId) || db.users[0];
+      if (!user) {
+        return new Response(
+          JSON.stringify({
+            error: "invalid_grant",
+            error_description: "Invalid refresh token",
+            message: "Invalid refresh token",
+          }),
+          {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+      const token = createMockJwt(user);
+      const now = Math.floor(Date.now() / 1000);
+      return new Response(
+        JSON.stringify({
+          access_token: token,
+          token_type: "bearer",
+          expires_in: 31536000,
+          expires_at: now + 31536000,
+          refresh_token: "mock-refresh-" + user.id,
+          user: {
+            id: user.id,
+            aud: "authenticated",
+            role: "authenticated",
+            email: user.email,
+            user_metadata: user.user_metadata,
+            app_metadata: { provider: "email", providers: ["email"] },
+          },
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    }
   }
 
   if (pathname.includes("/auth/v1/user")) {
