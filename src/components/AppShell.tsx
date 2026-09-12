@@ -72,7 +72,6 @@ const NAV = [
   { to: "/tracker", key: "nav.tracker" },
   { to: "/records", key: "nav.records" },
   { to: "/donors", key: "nav.donors" },
-  { to: "/lookup", key: "nav.lookup" },
 ] as const;
 
 export function AppShell({

@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as LookupRouteImport } from './routes/lookup'
 import { Route as AuthenticatedDonorsRouteImport } from './routes/_authenticated/donors'
 import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
 import { Route as AuthenticatedTrackerRouteImport } from './routes/_authenticated/tracker'
@@ -29,11 +28,6 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LookupRoute = LookupRouteImport.update({
-  id: '/lookup',
-  path: '/lookup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedDonorsRoute = AuthenticatedDonorsRouteImport.update({
@@ -55,7 +49,6 @@ const AuthenticatedTrackerRoute = AuthenticatedTrackerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/lookup': typeof LookupRoute
   '/donors': typeof AuthenticatedDonorsRoute
   '/records': typeof AuthenticatedRecordsRoute
   '/tracker': typeof AuthenticatedTrackerRoute
@@ -63,7 +56,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/lookup': typeof LookupRoute
   '/donors': typeof AuthenticatedDonorsRoute
   '/records': typeof AuthenticatedRecordsRoute
   '/tracker': typeof AuthenticatedTrackerRoute
@@ -73,22 +65,20 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/lookup': typeof LookupRoute
   '/_authenticated/donors': typeof AuthenticatedDonorsRoute
   '/_authenticated/records': typeof AuthenticatedRecordsRoute
   '/_authenticated/tracker': typeof AuthenticatedTrackerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/lookup' | '/donors' | '/records' | '/tracker'
+  fullPaths: '/' | '/auth' | '/donors' | '/records' | '/tracker'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/lookup' | '/donors' | '/records' | '/tracker'
+  to: '/' | '/auth' | '/donors' | '/records' | '/tracker'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
-    | '/lookup'
     | '/_authenticated/donors'
     | '/_authenticated/records'
     | '/_authenticated/tracker'
@@ -98,7 +88,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
-  LookupRoute: typeof LookupRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -122,13 +111,6 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lookup': {
-      id: '/lookup'
-      path: '/lookup'
-      fullPath: '/lookup'
-      preLoaderRoute: typeof LookupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/donors': {
@@ -174,7 +156,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
-  LookupRoute: LookupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
