@@ -13,15 +13,23 @@ function isNewSupabaseApiKey(value: string): boolean {
   return value.startsWith('sb_publishable_') || value.startsWith('sb_secret_');
 }
 
-function isPlaceholderUrl(url: string): boolean {
-  return !url || url.includes('your-project-id') || url.includes('placeholder');
+function isPlaceholderConfig(url: string, key: string): boolean {
+  return (
+    !url ||
+    url.includes('your-project-id') ||
+    url.includes('placeholder') ||
+    !key ||
+    key.includes('your-publishable-key') ||
+    key.includes('your-service-role-key') ||
+    key.includes('placeholder')
+  );
 }
 
 function createSupabaseFetch(supabaseKey: string): typeof fetch {
   return async (input, init) => {
     const url = typeof input === 'string' ? input : input instanceof Request ? input.url : input.toString();
 
-    if (isPlaceholderUrl(url)) {
+    if (isPlaceholderConfig(url, supabaseKey)) {
       const mockRes = await handleMockSupabaseRequest(url, init);
       if (mockRes) return mockRes;
     }
